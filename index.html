@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh Verma - Creative Portfolio</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">Harsh Verma</a>
+            <div class="nav-links">
+                <a href="#/" class="nav-link" data-path="/"><span>01</span> Home</a>
+                <a href="#/work" class="nav-link" data-path="/work"><span>02</span> Work</a>
+                <a href="#/about" class="nav-link" data-path="/about"><span>03</span> About</a>
+                <a href="#/contact" class="nav-link" data-path="/contact"><span>04</span> Contact</a>
+            </div>
+            <!-- Hamburger logic for mobile via JS -->
+            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                    <line x1="4" y1="6" x2="20" y2="6"></line>
+                    <line x1="4" y1="18" x2="20" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="#/" class="mobile-nav-link" data-path="/"><span>01</span> Home</a>
+        <a href="#/work" class="mobile-nav-link" data-path="/work"><span>02</span> Work</a>
+        <a href="#/about" class="mobile-nav-link" data-path="/about"><span>03</span> About</a>
+        <a href="#/contact" class="mobile-nav-link" data-path="/contact"><span>04</span> Contact</a>
+    </div>
+
+    <main id="app-root">
+        <!-- SPA pages rendered here -->
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <h2 class="footer-name">Harsh Verma</h2>
+            <div class="footer-info">
+                <p>Based in Kolkata, West Bengal</p>
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/harshfalsegenius/?skipRedirect=true"
+                        target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year">2026</span> Harsh Verma. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Templates for the SPA pages -->
+
+    <!-- PAGE 1: HOME -->
+    <template id="page-home">
+        <div class="page-container page-home">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content fade-up-anim parallax-bg" data-speed="0.3">
+                    <div class="tag-pill muted-tag uppercase-label">CREATIVE — VIDEO / DESIGN / POSTER</div>
+                    <h1 class="display-headline">Making things<br>that feel right.</h1>
+                    <p class="hero-subtext">I'm a video editor, designer, and poster maker — currently building
+                        something big.</p>
+                    <div class="cta-row">
+                        <a href="#/work" class="btn btn-primary">See My Work</a>
+                        <a href="#/about" class="btn btn-ghost">About Me</a>
+                    </div>
+                </div>
+                <!-- Optional scroll indicator down below in CSS if needed -->
+                <div class="scroll-indicator fade-up-anim parallax-bg uppercase-label" data-speed="0.6">↓ Scroll</div>
+            </section>
+
+            <!-- Skills Strip -->
+            <section class="skills-strip reveal-on-scroll">
+                <div class="skills-col">
+                    <h3 class="uppercase-label">VIDEO EDITING</h3>
+                    <p>Motion, storytelling, cuts that hit.</p>
+                </div>
+                <div class="skills-col">
+                    <h3 class="uppercase-label">UI / UX</h3>
+                    <p>Interfaces with intention.</p>
+                </div>
+                <div class="skills-col">
+                    <h3 class="uppercase-label">POSTER DESIGN</h3>
+                    <p>Type, composition, visual impact.</p>
+                </div>
+            </section>
+
+            <div class="horizontal-divider"></div>
+
+            <!-- Featured Project -->
+            <section class="featured-project-section reveal-on-scroll">
+                <div class="tag-pill gold-tag gold-label uppercase-label"
+                    style="display:inline-block; margin-bottom: 24px;">CURRENTLY BUILDING</div>
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="tag-pill in-progress-badge uppercase-label">In Progress</div>
+                        <h2 class="fc-title">AI Crop Yield Predictor</h2>
+                        <p class="fc-desc">A UX research project on predictive AI for farming, estimating crop yields
+                            across India using government soil and climate data.</p>
+                        <button class="btn btn-ghost disabled" disabled>I'll Add Details Soon →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder">
+                            <span class="muted-label">Project Preview Coming</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Work Preview Strip -->
+            <section class="work-preview-section reveal-on-scroll">
+                <h2 class="section-heading">A few things I've made</h2>
+                <div class="work-grid">
+                    <!-- Card 1 -->
+                    <a href="https://doubleslash4.ieee-jaduniv.in" target="_blank" class="work-card">
+                        <div class="card-image bg-ui"></div>
+                        <div class="card-meta">
+                            <h3 class="card-title">DoubleSlash 4.0</h3>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">UI/UX</span>
+                                <span class="card-year">2024</span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 2 -->
+                    <a href="https://elevatex3.ieee-jaduniv.in" target="_blank" class="work-card">
+                        <div class="card-image bg-ui" style="background: linear-gradient(135deg, #1A1A1A, #111);"></div>
+                        <div class="card-meta">
+                            <h3 class="card-title">ElevateX 3.0</h3>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">UI/UX</span>
+                                <span class="card-year">2024</span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 3 -->
+                    <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card">
+                        <div class="card-image bg-video"></div>
+                        <div class="card-meta">
+                            <h3 class="card-title">IEEE JUSB Reels</h3>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">VIDEO</span>
+                                <span class="card-year">2023-24</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="center-btn">
+                    <a href="#/work" class="btn btn-ghost">View All Work →</a>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <!-- PAGE 2: WORK -->
+    <template id="page-work">
+        <div class="page-container page-work pt-120">
+            <div class="page-header fade-up-anim">
+                <h1 class="display-headline">Work</h1>
+                <p class="hero-subtext uppercase-label">Video / Design / Poster</p>
+            </div>
+
+            <!-- Featured Banner Repeated -->
+            <section class="featured-project-section fade-up-anim mb-80 reveal-on-scroll">
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="flex-badges" style="display:flex; gap:8px; margin-bottom:16px;">
+                            <div class="tag-pill in-progress-badge uppercase-label">FEATURED</div>
+                            <div class="tag-pill in-progress-badge uppercase-label">IN PROGRESS</div>
+                        </div>
+                        <h2 class="fc-title">AI Crop Yield Predictor</h2>
+                        <p class="fc-desc">A UX research project on predictive AI for farming, estimating crop yields
+                            across India using government soil and climate data.</p>
+                        <button class="btn btn-ghost disabled" disabled>I'll Add Details Soon →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder">
+                            <span class="muted-label">Project Preview Coming</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filters -->
+            <div class="filters-row fade-up-anim">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="video">Video Editing</button>
+                <button class="filter-btn" data-filter="ui">UI / UX</button>
+                <button class="filter-btn" data-filter="poster">Posters</button>
+            </div>
+
+            <!-- Work Grid (Full) -->
+            <div class="work-grid full-grid reveal-on-scroll">
+                <!-- Video 1 -->
+                <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card" data-category="video">
+                    <div class="card-image bg-video"></div>
+                    <div class="card-meta">
+                        <h3 class="card-title">IEEE JUSB Reels</h3>
+                        <div class="card-tools">Premiere Pro, After Effects</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">VIDEO</span>
+                            <span class="card-year">2023-24</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- UI 1 -->
+                <a href="https://doubleslash4.ieee-jaduniv.in" target="_blank" class="work-card" data-category="ui">
+                    <div class="card-image bg-ui"></div>
+                    <div class="card-meta">
+                        <h3 class="card-title">DoubleSlash 4.0</h3>
+                        <div class="card-tools">Figma</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">UI/UX</span>
+                            <span class="card-year">2024</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- UI 2 -->
+                <a href="https://elevatex3.ieee-jaduniv.in" target="_blank" class="work-card" data-category="ui">
+                    <div class="card-image bg-ui" style="background: linear-gradient(135deg, #1A1A1A, #111);"></div>
+                    <div class="card-meta">
+                        <h3 class="card-title">ElevateX 3.0</h3>
+                        <div class="card-tools">Figma</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">UI/UX</span>
+                            <span class="card-year">2024</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Poster 1 -->
+                <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card" data-category="poster">
+                    <div class="card-image bg-poster"></div>
+                    <div class="card-meta">
+                        <h3 class="card-title">IEEE JUSB Posters</h3>
+                        <div class="card-tools">Illustrator, Photoshop</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">POSTER</span>
+                            <span class="card-year">2023-24</span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Empty State -->
+                <div class="work-card empty-state" data-category="all">
+                    <div class="empty-content">
+                        <span>More coming soon.</span>
+                    </div>
+                </div>
+            </div>
+            <div id="no-results" style="display:none;" class="fade-up-anim">
+                <div class="work-card empty-state" style="width:100%; height:300px; max-width:100%;">
+                    <div class="empty-content">
+                        <span>More coming soon.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- PAGE 3: ABOUT -->
+    <template id="page-about">
+        <div class="page-container page-about pt-120">
+            <div class="about-grid fade-up-anim">
+                <div class="about-left">
+                    <div class="uppercase-label muted-tag mb-16">ABOUT ME</div>
+                    <h1 class="about-headline">Early in the game.<br>Serious about the craft.</h1>
+                    <p class="about-paragraph">
+                        I am a lifelong learner driven by innovation and building projects that create real-world
+                        impact. As the Design Lead at IEEE JUSB, I direct our visual presence, edit all our reels, and
+                        design the posters. I also led the UI/UX design for major events like <a
+                            href="https://doubleslash4.ieee-jaduniv.in" target="_blank"
+                            style="text-decoration: underline; color: var(--text-primary);">DoubleSlash 4.0</a> (the
+                        largest hackathon in the West Bengal region) and <a href="https://elevatex3.ieee-jaduniv.in"
+                            target="_blank" style="text-decoration: underline; color: var(--text-primary);">ElevateX
+                            3.0</a>. Beyond design, I thrive in competitive environments and recently
+                        won an $800 prize at the AICSSYC pitching competition.
+                    </p>
+
+                    <div class="horizontal-divider"></div>
+
+                    <h3 class="skills-heading uppercase-label">Capabilities & Tools</h3>
+                    <ul class="skills-list">
+                        <li>Premiere Pro</li>
+                        <li>After Effects</li>
+                        <li>Figma</li>
+                        <li>Photoshop</li>
+                        <li>Illustrator</li>
+                        <li>Poster Design</li>
+                    </ul>
+
+                    <div class="currently-building-callout mt-40">
+                        <p class="cb-text">I'm currently researching predictive AI for agriculture — stay tuned.</p>
+                        <div class="tag-pill in-progress-badge uppercase-label display-inline">IN PROGRESS</div>
+                    </div>
+                </div>
+                <div class="about-right">
+                    <!-- Subtle geometric layout or decorative shape placeholder -->
+                    <div class="decorative-shape"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- PAGE 4: CONTACT -->
+    <template id="page-contact">
+        <div class="page-container page-contact pt-120">
+            <div class="contact-wrapper fade-up-anim">
+                <div class="uppercase-label muted-tag center-text mb-16">GET IN TOUCH</div>
+                <h1 class="contact-headline">Let's talk.</h1>
+                <p class="contact-subtext">Whether it's a project, collab, or just to say hi.</p>
+
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
+                    <div class="form-group">
+                        <label for="name" class="visually-hidden">Name</label>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="visually-hidden">Email</label>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="visually-hidden">Message</label>
+                        <textarea id="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width">Send Message</button>
+                </form>
+
+                <div class="social-row">
+                    <a href="https://www.linkedin.com/in/harshfalsegenius/?skipRedirect=true" target="_blank"
+                        class="social-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="main.js?v=6"></script>
+</body>
+
+</html>
