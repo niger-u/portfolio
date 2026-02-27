@@ -60,6 +60,25 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial load
     handleRouting();
 
+    // --- LOCAL CLOCK ---
+    function updateClock() {
+        const timeEl = document.getElementById('clock-time');
+        if (!timeEl) return;
+
+        const now = new Date();
+        const options = {
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: true
+        };
+        const timeString = now.toLocaleTimeString('en-US', options);
+        timeEl.textContent = timeString;
+    }
+
+    // Initial call and interval
+    updateClock();
+    setInterval(updateClock, 1000);
+
     // --- GLOBAL SCROLL EFFECTS (Header & Parallax) ---
     const siteHeader = document.querySelector('.navbar');
 
@@ -128,16 +147,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 let visibleCount = 0;
 
                 workCards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter) {
-                        card.style.display = 'flex';
-                        visibleCount++;
-                        // Little animation reset
-                        card.classList.remove('fade-up-anim', 'visible');
-                        void card.offsetWidth; // trigger reflow
-                        card.classList.add('fade-up-anim', 'visible');
-                        observer.observe(card);
-                    } else {
-                        card.style.display = 'none';
+                    try {
+                        console.log(`Processing card: ${card.querySelector('.card-title')?.textContent} | Category: ${card.dataset.category} | Current filter: ${filter}`);
+                        if (filter === 'all' || card.dataset.category === filter) {
+                            card.style.display = 'flex';
+                            visibleCount++;
+                            // Little animation reset
+                            card.classList.remove('fade-up-anim', 'visible');
+                            void card.offsetWidth; // trigger reflow
+                            card.classList.add('fade-up-anim', 'visible');
+                            console.log(` -> Set to flex`);
+                        } else {
+                            card.style.display = 'none';
+                            console.log(` -> Set to none`);
+                        }
+                    } catch (err) {
+                        console.error("Filter loop error:", err);
                     }
                 });
 

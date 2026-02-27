@@ -16,20 +16,26 @@
     <nav class="navbar">
         <div class="nav-content">
             <a href="/" class="logo">Harsh Verma</a>
-            <div class="nav-links">
-                <a href="#/" class="nav-link" data-path="/"><span>01</span> Home</a>
-                <a href="#/work" class="nav-link" data-path="/work"><span>02</span> Work</a>
-                <a href="#/about" class="nav-link" data-path="/about"><span>03</span> About</a>
-                <a href="#/contact" class="nav-link" data-path="/contact"><span>04</span> Contact</a>
+            <div class="nav-right" style="display: flex; align-items: center; gap: 24px;">
+                <div class="nav-links">
+                    <a href="#/" class="nav-link" data-path="/"><span>01</span> Home</a>
+                    <a href="#/work" class="nav-link" data-path="/work"><span>02</span> Work</a>
+                    <a href="#/about" class="nav-link" data-path="/about"><span>03</span> About</a>
+                    <a href="#/contact" class="nav-link" data-path="/contact"><span>04</span> Contact</a>
+                </div>
+                <div class="local-clock" id="local-clock"
+                    style="font-size: 14px; color: var(--text-muted); font-weight: 500;">
+                    <span id="clock-time"></span>
+                </div>
+                <!-- Hamburger logic for mobile via JS -->
+                <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                        <line x1="4" y1="18" x2="20" y2="18"></line>
+                    </svg>
+                </button>
             </div>
-            <!-- Hamburger logic for mobile via JS -->
-            <button class="mobile-menu-btn" aria-label="Toggle Navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="4" y1="12" x2="20" y2="12"></line>
-                    <line x1="4" y1="6" x2="20" y2="6"></line>
-                    <line x1="4" y1="18" x2="20" y2="18"></line>
-                </svg>
-            </button>
         </div>
     </nav>
 
@@ -112,8 +118,34 @@
                         <button class="btn btn-ghost disabled" disabled>I'll Add Details Soon →</button>
                     </div>
                     <div class="fc-right">
-                        <div class="fc-image-placeholder">
-                            <span class="muted-label">Project Preview Coming</span>
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="border:none; padding: 0;">
+                            <img src="farming.jpg" alt="Farming Predictive AI"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Second Featured Project: Universe Unboxed -->
+            <section class="featured-project-section reveal-on-scroll" style="margin-top: 2rem;">
+                <div class="tag-pill gold-tag gold-label uppercase-label"
+                    style="display:inline-block; margin-bottom: 24px;">EDTECH COMMUNITY</div>
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="flex-badges" style="display:flex; gap:8px; margin-bottom:16px;">
+                            <div class="tag-pill in-progress-badge uppercase-label">FEATURED</div>
+                        </div>
+                        <h2 class="fc-title">Universe Unboxed</h2>
+                        <p class="fc-desc">Co-founded and scaled a student-led IIT JEE preparation community from 0 to
+                            40,000+ members in under a year. Focused on Mathematics, Physics, and Chemistry, we fostered
+                            a collaborative environment that guided students to their dream colleges, including active
+                            members securing AIR 16 and AIR 17 in JEE Mains 2026.</p>
+                        <button class="btn btn-ghost disabled" disabled>I'll Add Details Soon →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="border:none; padding: 0;">
+                            <img src="unboxed.png" alt="Universe Unboxed Community"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
                         </div>
                     </div>
                 </div>
@@ -125,34 +157,79 @@
                 <div class="work-grid">
                     <!-- Card 1 -->
                     <a href="https://doubleslash4.ieee-jaduniv.in" target="_blank" class="work-card">
-                        <div class="card-image bg-ui"></div>
+                        <div class="card-image"
+                            style="background-image: url('doubleslash.png'); background-size: cover; background-position: center;">
+                        </div>
                         <div class="card-meta">
                             <h3 class="card-title">DoubleSlash 4.0</h3>
                             <div class="card-bot-row">
                                 <span class="tag-pill uppercase-label">UI/UX</span>
-                                <span class="card-year">2024</span>
+                                <span class="card-year"></span>
                             </div>
                         </div>
                     </a>
                     <!-- Card 2 -->
                     <a href="https://elevatex3.ieee-jaduniv.in" target="_blank" class="work-card">
-                        <div class="card-image bg-ui" style="background: linear-gradient(135deg, #1A1A1A, #111);"></div>
+                        <div class="card-image"
+                            style="background-image: url('elevatex.png'); background-size: cover; background-position: center;">
+                        </div>
                         <div class="card-meta">
                             <h3 class="card-title">ElevateX 3.0</h3>
                             <div class="card-bot-row">
                                 <span class="tag-pill uppercase-label">UI/UX</span>
-                                <span class="card-year">2024</span>
+                                <span class="card-year"></span>
                             </div>
                         </div>
                     </a>
                     <!-- Card 3 -->
                     <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card">
-                        <div class="card-image bg-video"></div>
+                        <div class="card-image"
+                            style="background-image: url('ieee.png'); background-size: cover; background-position: center;">
+                        </div>
                         <div class="card-meta">
                             <h3 class="card-title">IEEE JUSB Reels</h3>
                             <div class="card-bot-row">
                                 <span class="tag-pill uppercase-label">VIDEO</span>
-                                <span class="card-year">2023-24</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 4 -->
+                    <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('ieee.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">IEEE JUSB Posters</h3>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">POSTER</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 5 -->
+                    <a href="#" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('jumun.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">JU MUN</h3>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">POSTER</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 6 -->
+                    <a href="#" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('juds.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">JUDS</h3>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">POSTER</span>
+                                <span class="card-year"></span>
                             </div>
                         </div>
                     </a>
@@ -186,8 +263,34 @@
                         <button class="btn btn-ghost disabled" disabled>I'll Add Details Soon →</button>
                     </div>
                     <div class="fc-right">
-                        <div class="fc-image-placeholder">
-                            <span class="muted-label">Project Preview Coming</span>
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="border:none; padding: 0;">
+                            <img src="farming.jpg" alt="Farming Predictive AI"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Second Featured Project: Universe Unboxed -->
+            <section class="featured-project-section fade-up-anim mb-80 reveal-on-scroll">
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="flex-badges" style="display:flex; gap:8px; margin-bottom:16px;">
+                            <div class="tag-pill in-progress-badge uppercase-label"
+                                style="background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2);">
+                                EDTECH COMMUNITY</div>
+                        </div>
+                        <h2 class="fc-title">Universe Unboxed</h2>
+                        <p class="fc-desc">Co-founded and scaled a student-led IIT JEE preparation community from 0 to
+                            40,000+ members in under a year. Focused on Mathematics, Physics, and Chemistry, we fostered
+                            a collaborative environment that guided students to their dream colleges, including active
+                            members securing AIR 16 and AIR 17 in JEE Mains 2026.</p>
+                        <button class="btn btn-ghost disabled" disabled>I'll Add Details Soon →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="border:none; padding: 0;">
+                            <img src="unboxed.png" alt="Universe Unboxed Community"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
                         </div>
                     </div>
                 </div>
@@ -205,49 +308,85 @@
             <div class="work-grid full-grid reveal-on-scroll">
                 <!-- Video 1 -->
                 <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card" data-category="video">
-                    <div class="card-image bg-video"></div>
+                    <div class="card-image"
+                        style="background-image: url('ieee.png'); background-size: cover; background-position: center;">
+                    </div>
                     <div class="card-meta">
                         <h3 class="card-title">IEEE JUSB Reels</h3>
-                        <div class="card-tools">Premiere Pro, After Effects</div>
+                        <div class="card-tools">DaVinci Resolve, CapCut</div>
                         <div class="card-bot-row">
                             <span class="tag-pill uppercase-label">VIDEO</span>
-                            <span class="card-year">2023-24</span>
+                            <span class="card-year"></span>
                         </div>
                     </div>
                 </a>
                 <!-- UI 1 -->
                 <a href="https://doubleslash4.ieee-jaduniv.in" target="_blank" class="work-card" data-category="ui">
-                    <div class="card-image bg-ui"></div>
+                    <div class="card-image"
+                        style="background-image: url('doubleslash.png'); background-size: cover; background-position: center;">
+                    </div>
                     <div class="card-meta">
                         <h3 class="card-title">DoubleSlash 4.0</h3>
                         <div class="card-tools">Figma</div>
                         <div class="card-bot-row">
                             <span class="tag-pill uppercase-label">UI/UX</span>
-                            <span class="card-year">2024</span>
+                            <span class="card-year"></span>
                         </div>
                     </div>
                 </a>
                 <!-- UI 2 -->
                 <a href="https://elevatex3.ieee-jaduniv.in" target="_blank" class="work-card" data-category="ui">
-                    <div class="card-image bg-ui" style="background: linear-gradient(135deg, #1A1A1A, #111);"></div>
+                    <div class="card-image"
+                        style="background-image: url('elevatex.png'); background-size: cover; background-position: center;">
+                    </div>
                     <div class="card-meta">
                         <h3 class="card-title">ElevateX 3.0</h3>
                         <div class="card-tools">Figma</div>
                         <div class="card-bot-row">
                             <span class="tag-pill uppercase-label">UI/UX</span>
-                            <span class="card-year">2024</span>
+                            <span class="card-year"></span>
                         </div>
                     </div>
                 </a>
                 <!-- Poster 1 -->
                 <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card" data-category="poster">
-                    <div class="card-image bg-poster"></div>
+                    <div class="card-image"
+                        style="background-image: url('ieee.png'); background-size: cover; background-position: center;">
+                    </div>
                     <div class="card-meta">
                         <h3 class="card-title">IEEE JUSB Posters</h3>
-                        <div class="card-tools">Illustrator, Photoshop</div>
+                        <div class="card-tools">Canva, Pinterest</div>
                         <div class="card-bot-row">
                             <span class="tag-pill uppercase-label">POSTER</span>
-                            <span class="card-year">2023-24</span>
+                            <span class="card-year"></span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Poster 2 -->
+                <a href="#" target="_blank" class="work-card" data-category="poster">
+                    <div class="card-image"
+                        style="background-image: url('jumun.png'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-meta">
+                        <h3 class="card-title">JU MUN</h3>
+                        <div class="card-tools">Canva, Pinterest</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">POSTER</span>
+                            <span class="card-year"></span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Poster 3 -->
+                <a href="#" target="_blank" class="work-card" data-category="poster">
+                    <div class="card-image"
+                        style="background-image: url('juds.png'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-meta">
+                        <h3 class="card-title">JUDS</h3>
+                        <div class="card-tools">Canva, Pinterest</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">POSTER</span>
+                            <span class="card-year"></span>
                         </div>
                     </div>
                 </a>
@@ -291,11 +430,11 @@
 
                     <h3 class="skills-heading uppercase-label">Capabilities & Tools</h3>
                     <ul class="skills-list">
-                        <li>Premiere Pro</li>
-                        <li>After Effects</li>
+                        <li>DaVinci Resolve</li>
+                        <li>CapCut</li>
                         <li>Figma</li>
-                        <li>Photoshop</li>
-                        <li>Illustrator</li>
+                        <li>Canva</li>
+                        <li>Pinterest</li>
                         <li>Poster Design</li>
                     </ul>
 
