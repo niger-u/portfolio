@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harsh Verma - Creative Portfolio</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="/" class="logo">Harsh Verma</a>
+            <div class="nav-right" style="display: flex; align-items: center; gap: 24px;">
+                <div class="nav-links">
+                    <a href="#/" class="nav-link" data-path="/"><span>01</span> Home</a>
+                    <a href="#/work" class="nav-link" data-path="/work"><span>02</span> Work</a>
+                    <a href="#/about" class="nav-link" data-path="/about"><span>03</span> About</a>
+                    <a href="#/contact" class="nav-link" data-path="/contact"><span>04</span> Contact</a>
+                </div>
+                <div class="local-clock" id="local-clock"
+                    style="font-size: 14px; color: var(--text-muted); font-weight: 500;">
+                    <span id="clock-time"></span>
+                </div>
+                <!-- Hamburger logic for mobile via JS -->
+                <button class="mobile-menu-btn" aria-label="Toggle Navigation">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="6" x2="20" y2="6"></line>
+                        <line x1="4" y1="18" x2="20" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="mobile-menu">
+        <a href="#/" class="mobile-nav-link" data-path="/"><span>01</span> Home</a>
+        <a href="#/work" class="mobile-nav-link" data-path="/work"><span>02</span> Work</a>
+        <a href="#/about" class="mobile-nav-link" data-path="/about"><span>03</span> About</a>
+        <a href="#/contact" class="mobile-nav-link" data-path="/contact"><span>04</span> Contact</a>
+    </div>
+
+    <main id="app-root">
+        <!-- SPA pages rendered here -->
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <h2 class="footer-name">Harsh Verma</h2>
+            <div class="footer-info">
+                <p>Based in Kolkata, West Bengal</p>
+                <div class="footer-links">
+                    <a href="https://www.linkedin.com/in/harshfalsegenius/?skipRedirect=true"
+                        target="_blank">LinkedIn</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; <span id="year">2026</span> Harsh Verma. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Templates for the SPA pages -->
+
+    <!-- PAGE 1: HOME -->
+    <template id="page-home">
+        <div class="page-container page-home">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content fade-up-anim parallax-bg" data-speed="0.3">
+                    <div style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin-bottom: 24px;">
+                        <div class="tag-pill muted-tag uppercase-label">CREATIVE — VIDEO / DESIGN / POSTER</div>
+                        <div class="tag-pill uppercase-label" style="display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary); letter-spacing: 1px;">
+                            <span style="width: 8px; height: 8px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 8px #4ade80;"></span>
+                            Currently Operations Intern @ Hiredue
+                        </div>
+                    </div>
+                    <h1 class="display-headline">Making things<br>that feel right.</h1>
+                    <p class="hero-subtext">I'm a video editor, designer, and poster maker — building stuff that matters.</p>
+                    <div class="cta-row">
+                        <a href="#/work" class="btn btn-primary">See My Work</a>
+                        <a href="#/about" class="btn btn-ghost">About Me</a>
+                    </div>
+                </div>
+                <!-- Optional scroll indicator down below in CSS if needed -->
+                <div class="scroll-indicator fade-up-anim parallax-bg uppercase-label" data-speed="0.6">↓ Scroll</div>
+            </section>
+
+            <!-- Services Section -->
+            <section class="services-section reveal-on-scroll">
+                <div class="services-header">
+                    <h2 class="section-heading" style="margin-bottom: 0;">Services</h2>
+                </div>
+                <div class="services-divider"></div>
+
+                <div class="services-content">
+                    <div class="services-left">
+                        <p class="services-intro">
+                            I am dedicated to pushing creative boundaries and delivering high-impact work. Throughout my
+                            journey, I've honed diverse skills across design and video, always focusing on quality and
+                            user experience.
+                        </p>
+                    </div>
+                    <div class="services-right">
+                        <!-- Digital Design -->
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <path d="M12 2L2 22h20L12 2z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="service-title">Digital Design</h3>
+                            <p class="service-desc">Crafting visually compelling user interfaces and digital experiences
+                                that blend brand identity with seamless functionality.</p>
+                        </div>
+
+                        <!-- Video Editing (Editing) -->
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                </svg>
+                            </div>
+                            <h3 class="service-title">Video Editing</h3>
+                            <p class="service-desc">Transforming raw footage into engaging narratives with precise
+                                pacing, motion graphics, and impactful storytelling.</p>
+                        </div>
+
+                        <!-- UX Research -->
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </div>
+                            <h3 class="service-title">UX Research</h3>
+                            <p class="service-desc">Investigating user behaviors and needs to design data-driven
+                                solutions and intuitive, user-centric products.</p>
+                        </div>
+
+                        <!-- Web Design -->
+                        <div class="service-item">
+                            <div class="service-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="1.5">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <line x1="3" y1="9" x2="21" y2="9"></line>
+                                    <line x1="9" y1="21" x2="9" y2="9"></line>
+                                </svg>
+                            </div>
+                            <h3 class="service-title">Web Design</h3>
+                            <p class="service-desc">Building responsive, visually striking websites that prioritize
+                                accessibility, aesthetics, and high performance.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="horizontal-divider"></div>
+
+            <!-- Hiredue Operations Internship Featured -->
+            <section class="featured-project-section reveal-on-scroll">
+                <div class="tag-pill uppercase-label"
+                    style="display:inline-block; margin-bottom: 24px; background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2);">INTERNSHIP</div>
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="tag-pill uppercase-label" style="background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3);">CURRENT</div>
+                        <h2 class="fc-title">Operations Intern @ Hiredue</h2>
+                        <p class="fc-desc">Working actively across multiple domains including marketing strategy, video editing, design initiatives, and UX research.</p>
+                        <button class="btn btn-ghost disabled" disabled>Details Upcoming →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); padding: 0; min-height: 100%;">
+                            <span style="color: rgba(255,255,255,0.3); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Images Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Project -->
+            <section class="featured-project-section reveal-on-scroll" style="margin-top: 2rem;">
+                <div class="tag-pill uppercase-label"
+                    style="display:inline-block; margin-bottom: 24px; background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2);">UX RESEARCH PROJECT</div>
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="tag-pill uppercase-label" style="background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3);">Completed</div>
+                        <h2 class="fc-title">AI Crop Yield Predictor</h2>
+                        <p class="fc-desc">A UX research project on predictive AI for farming, estimating crop yields
+                            across India using government soil and climate data.</p>
+                        <button class="btn btn-ghost disabled" disabled>Details Upcoming →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="border:none; padding: 0;">
+                            <img src="farming.jpg" alt="Farming Predictive AI"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Second Featured Project: Universe Unboxed -->
+            <section class="featured-project-section reveal-on-scroll" style="margin-top: 2rem;">
+                <div class="tag-pill gold-tag gold-label uppercase-label"
+                    style="display:inline-block; margin-bottom: 24px;">EDTECH COMMUNITY</div>
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="flex-badges" style="display:flex; gap:8px; margin-bottom:16px;">
+                            <div class="tag-pill in-progress-badge uppercase-label">FEATURED</div>
+                        </div>
+                        <h2 class="fc-title">Universe Unboxed</h2>
+                        <p class="fc-desc">Co-founded and scaled a student-led IIT JEE preparation community from 0 to
+                            40,000+ members in under a year. Focused on Mathematics, Physics, and Chemistry, we fostered
+                            a collaborative environment that guided students to their dream colleges, including active
+                            members securing AIR 16 and AIR 17 in JEE Mains 2026.</p>
+                        <button class="btn btn-ghost disabled" disabled>I'll Add Details Soon →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="border:none; padding: 0;">
+                            <img src="unboxed.png" alt="Universe Unboxed Community"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Work Preview Strip -->
+            <section class="work-preview-section reveal-on-scroll">
+                <h2 class="section-heading">A few things I've made</h2>
+                <div class="work-grid">
+                    <!-- Card 1 -->
+                    <a href="https://doubleslash4.ieee-jaduniv.in" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('doubleslash.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">DoubleSlash 4.0</h3>
+                            <p class="card-desc">Contributed to website ideation and conceptualized key design elements.
+                            </p>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">UI/UX</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 2 -->
+                    <a href="https://elevatex3.ieee-jaduniv.in" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('elevatex.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">ElevateX 3.0</h3>
+                            <p class="card-desc">Led the wireframing process and crafted the UI/UX design in Figma.</p>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">UI/UX</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 3 -->
+                    <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('ieee.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">IEEE JUSB Reels</h3>
+                            <p class="card-desc">Sole editor for all video content published on this platform.</p>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">VIDEO</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 4 -->
+                    <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('ieee.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">IEEE JUSB Posters</h3>
+                            <p class="card-desc">As Design Lead, directed visual strategy and majorly contributed to
+                                poster creation.</p>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">POSTER</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 5 -->
+                    <a href="https://www.instagram.com/judebatingsociety/" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('jumun.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">JU MUN</h3>
+                            <p class="card-desc">As USG of Tech Affairs, designed promotional posters and curated color
+                                palettes.</p>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">POSTER</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                    <!-- Card 6 -->
+                    <a href="https://www.instagram.com/judebatingsociety/" target="_blank" class="work-card">
+                        <div class="card-image"
+                            style="background-image: url('juds.png'); background-size: cover; background-position: center;">
+                        </div>
+                        <div class="card-meta">
+                            <h3 class="card-title">JUDS</h3>
+                            <p class="card-desc">Designed event certificates and promotional posters.</p>
+                            <div class="card-bot-row">
+                                <span class="tag-pill uppercase-label">POSTER</span>
+                                <span class="card-year"></span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="center-btn">
+                    <a href="#/work" class="btn btn-ghost">View All Work →</a>
+                </div>
+            </section>
+        </div>
+    </template>
+
+    <!-- PAGE 2: WORK -->
+    <template id="page-work">
+        <div class="page-container page-work pt-120">
+            <div class="page-header fade-up-anim">
+                <h1 class="display-headline">Work</h1>
+                <p class="hero-subtext uppercase-label">Video / Design / Poster</p>
+            </div>
+
+            <!-- Hiredue Operations Internship Featured -->
+            <section class="featured-project-section fade-up-anim mb-80 reveal-on-scroll">
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="flex-badges" style="display:flex; gap:8px; margin-bottom:16px;">
+                            <div class="tag-pill uppercase-label" style="background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2);">INTERNSHIP</div>
+                            <div class="tag-pill uppercase-label" style="background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3);">CURRENT</div>
+                        </div>
+                        <h2 class="fc-title">Operations Intern @ Hiredue</h2>
+                        <p class="fc-desc">Working actively across multiple domains including marketing strategy, video editing, design initiatives, and UX research.</p>
+                        <button class="btn btn-ghost disabled" disabled>Details Upcoming →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="display:flex; align-items:center; justify-content:center; background:rgba(255,255,255,0.02); border: 1px dashed rgba(255,255,255,0.1); padding: 0; min-height: 100%;">
+                            <span style="color: rgba(255,255,255,0.3); font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">Images Coming Soon</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Banner Repeated -->
+            <section class="featured-project-section fade-up-anim mb-80 reveal-on-scroll">
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="flex-badges" style="display:flex; gap:8px; margin-bottom:16px;">
+                            <div class="tag-pill uppercase-label" style="background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2);">FEATURED</div>
+                            <div class="tag-pill uppercase-label" style="background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3);">COMPLETED</div>
+                        </div>
+                        <h2 class="fc-title">AI Crop Yield Predictor</h2>
+                        <p class="fc-desc">A UX research project on predictive AI for farming, estimating crop yields
+                            across India using government soil and climate data.</p>
+                        <button class="btn btn-ghost disabled" disabled>Details Upcoming →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="border:none; padding: 0;">
+                            <img src="farming.jpg" alt="Farming Predictive AI"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Second Featured Project: Universe Unboxed -->
+            <section class="featured-project-section fade-up-anim mb-80 reveal-on-scroll">
+                <div class="featured-card">
+                    <div class="fc-left">
+                        <div class="flex-badges" style="display:flex; gap:8px; margin-bottom:16px;">
+                            <div class="tag-pill in-progress-badge uppercase-label"
+                                style="background: rgba(255,255,255,0.1); color: var(--text-primary); border: 1px solid rgba(255,255,255,0.2);">
+                                EDTECH COMMUNITY</div>
+                        </div>
+                        <h2 class="fc-title">Universe Unboxed</h2>
+                        <p class="fc-desc">Co-founded and scaled a student-led IIT JEE preparation community from 0 to
+                            40,000+ members in under a year. Focused on Mathematics, Physics, and Chemistry, we fostered
+                            a collaborative environment that guided students to their dream colleges, including active
+                            members securing AIR 16 and AIR 17 in JEE Mains 2026.</p>
+                        <button class="btn btn-ghost disabled" disabled>I'll Add Details Soon →</button>
+                    </div>
+                    <div class="fc-right">
+                        <div class="fc-image-placeholder border-0 overflow-hidden" style="border:none; padding: 0;">
+                            <img src="unboxed.png" alt="Universe Unboxed Community"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 4px;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Filters -->
+            <div class="filters-row fade-up-anim">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="video">Video Editing</button>
+                <button class="filter-btn" data-filter="ui">UI / UX</button>
+                <button class="filter-btn" data-filter="poster">Posters</button>
+            </div>
+
+            <!-- Work Grid (Full) -->
+            <div class="work-grid full-grid reveal-on-scroll">
+                <!-- Video 1 -->
+                <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card" data-category="video">
+                    <div class="card-image"
+                        style="background-image: url('ieee.png'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-meta">
+                        <h3 class="card-title">IEEE JUSB Reels</h3>
+                        <p class="card-desc">Sole editor for all video content published on this platform.</p>
+                        <div class="card-tools">DaVinci Resolve, CapCut</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">VIDEO</span>
+                            <span class="card-year"></span>
+                        </div>
+                    </div>
+                </a>
+                <!-- UI 1 -->
+                <a href="https://doubleslash4.ieee-jaduniv.in" target="_blank" class="work-card" data-category="ui">
+                    <div class="card-image"
+                        style="background-image: url('doubleslash.png'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-meta">
+                        <h3 class="card-title">DoubleSlash 4.0</h3>
+                        <p class="card-desc">Contributed to website ideation and conceptualized key design elements.</p>
+                        <div class="card-tools">Figma</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">UI/UX</span>
+                            <span class="card-year"></span>
+                        </div>
+                    </div>
+                </a>
+                <!-- UI 2 -->
+                <a href="https://elevatex3.ieee-jaduniv.in" target="_blank" class="work-card" data-category="ui">
+                    <div class="card-image"
+                        style="background-image: url('elevatex.png'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-meta">
+                        <h3 class="card-title">ElevateX 3.0</h3>
+                        <p class="card-desc">Led the wireframing process and crafted the UI/UX design in Figma.</p>
+                        <div class="card-tools">Figma</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">UI/UX</span>
+                            <span class="card-year"></span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Poster 1 -->
+                <a href="https://www.instagram.com/_ieeeju/" target="_blank" class="work-card" data-category="poster">
+                    <div class="card-image"
+                        style="background-image: url('ieee.png'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-meta">
+                        <h3 class="card-title">IEEE JUSB Posters</h3>
+                        <p class="card-desc">As Design Lead, directed visual strategy and majorly contributed to poster
+                            creation.</p>
+                        <div class="card-tools">Canva, Pinterest</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">POSTER</span>
+                            <span class="card-year"></span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Poster 2 -->
+                <a href="https://www.instagram.com/judebatingsociety/" target="_blank" class="work-card"
+                    data-category="poster">
+                    <div class="card-image"
+                        style="background-image: url('jumun.png'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-meta">
+                        <h3 class="card-title">JU MUN</h3>
+                        <p class="card-desc">As USG of Tech Affairs, designed promotional posters and curated color
+                            palettes.</p>
+                        <div class="card-tools">Canva, Pinterest</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">POSTER</span>
+                            <span class="card-year"></span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Poster 3 -->
+                <a href="https://www.instagram.com/judebatingsociety/" target="_blank" class="work-card"
+                    data-category="poster">
+                    <div class="card-image"
+                        style="background-image: url('juds.png'); background-size: cover; background-position: center;">
+                    </div>
+                    <div class="card-meta">
+                        <h3 class="card-title">JUDS</h3>
+                        <p class="card-desc">Designed event certificates and promotional posters.</p>
+                        <div class="card-tools">Canva, Pinterest</div>
+                        <div class="card-bot-row">
+                            <span class="tag-pill uppercase-label">POSTER</span>
+                            <span class="card-year"></span>
+                        </div>
+                    </div>
+                </a>
+                <!-- Empty State -->
+                <div class="work-card empty-state" data-category="all">
+                    <div class="empty-content">
+                        <span>More coming soon.</span>
+                    </div>
+                </div>
+            </div>
+            <div id="no-results" style="display:none;" class="fade-up-anim">
+                <div class="work-card empty-state" style="width:100%; height:300px; max-width:100%;">
+                    <div class="empty-content">
+                        <span>More coming soon.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- PAGE 3: ABOUT -->
+    <template id="page-about">
+        <div class="page-container page-about pt-120">
+            <div class="about-grid fade-up-anim">
+                <div class="about-left">
+                    <div class="uppercase-label muted-tag mb-16">ABOUT ME</div>
+                    <h1 class="about-headline">Early in the game.<br>Serious about the craft.</h1>
+                    <p class="about-paragraph">
+                        I am a lifelong learner driven by innovation and building projects that create real-world
+                        impact. As the Design Lead at IEEE JUSB, I direct our visual presence, edit all our reels, and
+                        design the posters. I also led the UI/UX design for major events like <a
+                            href="https://doubleslash4.ieee-jaduniv.in" target="_blank"
+                            style="text-decoration: underline; color: var(--text-primary);">DoubleSlash 4.0</a> (the
+                        largest hackathon in the West Bengal region) and <a href="https://elevatex3.ieee-jaduniv.in"
+                            target="_blank" style="text-decoration: underline; color: var(--text-primary);">ElevateX
+                            3.0</a>. Beyond design, I thrive in competitive environments and recently
+                        won an $800 prize at the AICSSYC pitching competition.
+                    </p>
+
+                    <div class="horizontal-divider"></div>
+
+                    <h3 class="skills-heading uppercase-label">Capabilities & Tools</h3>
+                    <ul class="skills-list">
+                        <li>DaVinci Resolve</li>
+                        <li>CapCut</li>
+                        <li>Figma</li>
+                        <li>Canva</li>
+                        <li>Pinterest</li>
+                        <li>Poster Design</li>
+                    </ul>
+
+                    <div class="currently-building-callout mt-40">
+                        <p class="cb-text">I'm currently working as an <strong>Operations Intern</strong> at a startup named <strong>Hiredue</strong>.</p>
+                        <div class="tag-pill uppercase-label display-inline" style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text-primary);"><span style="display:inline-block; width: 6px; height: 6px; border-radius: 50%; background: #4ade80; margin-right: 6px; position: relative; top: -1px; box-shadow: 0 0 6px #4ade80;"></span>CURRENT ROLE</div>
+                    </div>
+                </div>
+                <div class="about-right">
+                    <!-- Subtle geometric layout or decorative shape placeholder -->
+                    <div class="decorative-shape"></div>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- PAGE 4: CONTACT -->
+    <template id="page-contact">
+        <div class="page-container page-contact pt-120">
+            <div class="contact-wrapper fade-up-anim">
+                <div class="uppercase-label muted-tag center-text mb-16">GET IN TOUCH</div>
+                <h1 class="contact-headline">Let's talk.</h1>
+                <p class="contact-subtext">Whether it's a project, collab, or just to say hi.</p>
+
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
+                    <div class="form-group">
+                        <label for="name" class="visually-hidden">Name</label>
+                        <input type="text" id="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="visually-hidden">Email</label>
+                        <input type="email" id="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="visually-hidden">Message</label>
+                        <textarea id="message" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary full-width">Send Message</button>
+                </form>
+
+                <div class="social-row">
+                    <a href="https://www.linkedin.com/in/harshfalsegenius/?skipRedirect=true" target="_blank"
+                        class="social-link">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                        LinkedIn
+                    </a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <script src="main.js?v=6"></script>
+</body>
+
+</html>

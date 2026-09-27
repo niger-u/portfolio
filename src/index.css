@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Inter Tight', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font-display);
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.font-display {
+  font-family: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* 00PIUM Stretched Brutalist Typography */
+.music-stretch {
+  transform: scaleY(1.2);
+  display: inline-block;
+  transform-origin: center;
+}
+
+.music-stretch-lg {
+  transform: scaleY(1.25);
+  display: inline-block;
+  transform-origin: center;
+}
+
+.music-stretch-sm {
+  transform: scaleY(1.15);
+  display: inline-block;
+  transform-origin: center;
+}
+
+/* Gallery Card Physics */
+.bp-card {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bp-card {
+    will-change: auto;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
