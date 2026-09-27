@@ -128,7 +128,7 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
   return (
     <div
       ref={panelRef}
-      className="fixed inset-0 bg-black z-10 overflow-hidden"
+      className="fixed inset-0 bg-black z-20 overflow-hidden"
       style={{
         borderTop: '1px solid rgba(255, 255, 255, 0.2)',
         transform: 'translateY(100vh)',

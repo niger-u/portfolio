@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FilmGrain } from './components/FilmGrain';
 import { CustomCursor } from './components/CustomCursor';
 import { HeroVideo } from './components/HeroVideo';
-import { BrutalistUI } from './components/BrutalistUI';
+import { BrutalistUI, HeroUI } from './components/BrutalistUI';
 import { VaultGallery } from './components/VaultGallery';
 import { ArtifactModal } from './components/ArtifactModal';
 import { IndexDrawer } from './components/IndexDrawer';
@@ -31,14 +31,23 @@ export const App: React.FC = () => {
       {/* Desktop Custom 48x48 Industrial Exclusion Reticle Cursor */}
       <CustomCursor />
 
-      {/* Hero Dual-Video Cursor Scrubbing Background */}
-      <HeroVideo />
-
-      {/* Overlaid Brutalist UI (Wordmark, Nav, Manifesto, Outro Info, ENTER Button) */}
+      {/* Persistent Global Nav & Outro UI */}
       <BrutalistUI
         onOpenIndex={() => setIsIndexOpen(true)}
         onEnterClick={handleEnterClick}
       />
+
+      {/* Hero Section Container (100vh Scoped Boundary) */}
+      <section
+        id="hero-section"
+        className="relative w-full h-screen overflow-hidden z-10 isolate pointer-events-none"
+      >
+        {/* Hero Background Video */}
+        <HeroVideo />
+
+        {/* Hero Brutalist Typography & Badges */}
+        <HeroUI />
+      </section>
 
       {/* Black Panel Vault Gallery (Sliding Anti-Design Grid & RAF Card Physics) */}
       <VaultGallery onSelectArtifact={(artifact) => setSelectedArtifact(artifact)} />
