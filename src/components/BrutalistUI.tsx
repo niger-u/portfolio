@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'motion/react';
+import { PROFILE_INFO } from '../data/archiveData';
 
 const SYMBOLS = ['00', '**', '†', '¥', '//', 'X'];
 
@@ -67,11 +68,11 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
               fill="#FFFFFF"
               fontFamily="'Inter Tight', sans-serif"
               fontWeight="800"
-              fontSize="24"
-              letterSpacing="-0.04em"
+              fontSize="20"
+              letterSpacing="-0.03em"
               style={{ transform: 'scaleY(1.15)' }}
             >
-              HARSH VERMA // MUSIC
+              HARSH VERMA // PRODUCT &amp; SYSTEMS
             </text>
           </svg>
         </div>
@@ -82,15 +83,14 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
-        className="fixed left-4 lg:left-8 z-20 pointer-events-none select-none top-[118px] sm:top-[180px] lg:top-[244px] w-[calc(100vw-32px)] sm:w-[calc(50vw-48px)] lg:w-[520px]"
+        className="fixed left-4 lg:left-8 z-20 pointer-events-none select-none top-[118px] sm:top-[180px] lg:top-[244px] w-[calc(100vw-32px)] sm:w-[calc(50vw-48px)] lg:w-[540px]"
         style={{ mixBlendMode: 'exclusion' }}
       >
-        <p
-          className="font-mono text-[11px] leading-[145%] tracking-[0.02em] uppercase text-white m-0"
-        >
-          [SYS.00 // PERSONAL ARCHIVE &amp; SELECTED WORKS] — CURATED DIGITAL ARTIFACTS, STRATEGY,
-          AND VISUAL SYSTEMS. ENGINE_STATE: ACTIVE. MOVE CURSOR HORIZONTALLY ACROSS AXIS TO SCRUB
-          DUAL VISUAL FEED. SCROLL TO INITIALIZE VAULT.
+        <p className="font-mono text-[11px] leading-[145%] tracking-[0.02em] uppercase text-white m-0">
+          [SYS.00 // HARSH VERMA — PRODUCT STRATEGY, OPERATIONS &amp; SYSTEMS ENGINEERING] — CHEMICAL
+          ENGINEERING @ JADAVPUR UNIVERSITY ('28). SPECIALIZING IN PRODUCT MANAGEMENT, DATA/WORKFLOW
+          PIPELINES, AND GTM SCALING. CONTACT: {PROFILE_INFO.email} | {PROFILE_INFO.location}.
+          ENGINE_STATE: ACTIVE. SCROLL TO INITIALIZE VAULT.
         </p>
       </motion.div>
 
@@ -99,14 +99,14 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1], delay: 0.15 }}
-        className="fixed top-4 right-4 lg:top-8 lg:right-8 z-20 pointer-events-auto select-none w-auto lg:w-[360px] h-[30px] flex justify-between items-center"
+        className="fixed top-4 right-4 lg:top-8 lg:right-8 z-20 pointer-events-auto select-none w-auto lg:w-[380px] h-[30px] flex justify-between items-center"
         style={{ mixBlendMode: 'exclusion' }}
       >
-        <span className="hidden lg:inline-block font-display font-[800] text-[14px] tracking-[-0.03em] uppercase text-white">
-          00 // ABOUT
+        <span className="hidden lg:inline-block font-display font-[800] text-[13px] tracking-[-0.03em] uppercase text-white">
+          00 // CV &amp; DOSSIER
         </span>
 
-        <div className="flex items-center gap-5 lg:gap-10">
+        <div className="flex items-center gap-5 lg:gap-8">
           <button
             onClick={onOpenIndex}
             className="flex items-center gap-2 bg-transparent border-0 cursor-pointer p-0 group"
@@ -124,7 +124,7 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
           </button>
 
           <span className="font-mono font-[500] text-[12px] lg:text-[13px] text-white tracking-wider">
-            [ INDEX // 10 ]
+            [ DOSSIER // 09 ]
           </span>
         </div>
       </motion.nav>
@@ -136,10 +136,10 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.45 }}
-        className="fixed z-20 pointer-events-none select-none flex flex-col items-center max-lg:left-0 max-lg:right-0 max-lg:bottom-12 lg:right-8 lg:bottom-20 lg:w-[350px]"
+        className="fixed z-20 pointer-events-none select-none flex flex-col items-center max-lg:left-0 max-lg:right-0 max-lg:bottom-12 lg:right-8 lg:bottom-20 lg:w-[360px]"
         style={{ mixBlendMode: 'exclusion' }}
       >
-        <div className="flex flex-col items-center lg:items-start w-[252px] lg:w-full mb-3 lg:mb-7">
+        <div className="flex flex-col items-center lg:items-start w-[270px] lg:w-full mb-3 lg:mb-7">
           {/* Rotating Cryptic Circle Sigil */}
           <div className="relative w-6 h-6 lg:w-[34px] lg:h-[34px] mb-2 lg:mb-3">
             <svg viewBox="0 0 40 40" className="w-full h-full">
@@ -161,20 +161,20 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
           </div>
 
           <div
-            className="font-display font-[800] text-[20px] lg:text-[28px] leading-[95%] text-center lg:text-left tracking-[-0.05em] uppercase text-white"
+            className="font-display font-[800] text-[18px] lg:text-[24px] leading-[95%] text-center lg:text-left tracking-[-0.05em] uppercase text-white"
             style={{ transform: 'scaleY(1.15)' }}
           >
-            SELECTED WORKS
+            PRODUCT STRATEGY // SYSTEMS
             <br />
-            I AM MUSIC // 00
+            JADAVPUR UNIV // '28
           </div>
         </div>
 
         <div
-          className="font-display font-[900] text-[60px] lg:text-[84px] leading-[95%] text-center lg:text-left tracking-[-0.06em] text-white"
+          className="font-display font-[900] text-[54px] lg:text-[76px] leading-[95%] text-center lg:text-left tracking-[-0.06em] text-white"
           style={{ transform: 'scaleY(1.2)' }}
         >
-          VOL.01
+          2026 // CV
         </div>
       </motion.div>
 
@@ -212,17 +212,17 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
       {/* 1J. Footer */}
       <footer
         id="outro-footer"
-        className="fixed pointer-events-none select-none left-4 lg:left-8 bottom-6 lg:bottom-8 flex justify-between lg:gap-20 z-20"
+        className="fixed pointer-events-none select-none left-4 lg:left-8 bottom-6 lg:bottom-8 flex flex-col sm:flex-row justify-between lg:gap-20 z-20 w-[calc(100vw-32px)] lg:w-auto"
         style={{
           mixBlendMode: 'exclusion',
           opacity: 0,
         }}
       >
-        <span className="font-mono font-[500] text-[10px] lg:text-[12px] tracking-[0.04em] uppercase text-white">
-          00PIUM // ARCHIVE ® 2026
+        <span className="font-mono font-[500] text-[10px] lg:text-[11px] tracking-[0.03em] uppercase text-white">
+          HARSH VERMA — {PROFILE_INFO.email} | {PROFILE_INFO.phone}
         </span>
-        <span className="font-mono font-[500] text-[10px] lg:text-[12px] tracking-[0.04em] uppercase text-white">
-          [ ALL RIGHTS RESERVED // *+! ]
+        <span className="font-mono font-[500] text-[10px] lg:text-[11px] tracking-[0.03em] uppercase text-white">
+          [ CHEMICAL ENG @ JADAVPUR UNIV '28 // 00PIUM ARCHIVE ]
         </span>
       </footer>
     </>

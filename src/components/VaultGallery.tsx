@@ -148,15 +148,18 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
               <div className="flex items-center gap-3 mb-2">
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 <span className="font-mono text-xs tracking-widest uppercase text-white/60">
-                  HARSH VERMA // VAULT ARCHIVE
+                  HARSH VERMA // VAULT DOSSIER
                 </span>
               </div>
               <h2
                 className="font-display font-[900] text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-none"
                 style={{ transform: 'scaleY(1.2)', transformOrigin: 'left bottom' }}
               >
-                SELECTED WORKS &amp; DOSSIERS
+                PRODUCT, STRATEGY &amp; SYSTEMS
               </h2>
+              <p className="font-mono text-xs text-white/50 tracking-wider uppercase mt-3">
+                PRODUCT MANAGEMENT // DATA WORKFLOWS // STRATEGY &amp; GTM // CHEMICAL ENG @ JU '28
+              </p>
             </div>
 
             {/* Category Filter Pills */}
@@ -174,6 +177,14 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
               {CATEGORY_DEFINITIONS.map((cat) => {
                 const count = ARCHIVE_ARTIFACTS.filter((a) => a.category === cat.id).length;
                 const isSelected = activeCategory === cat.id;
+                const shortLabel =
+                  cat.id === 'experience'
+                    ? 'EXPERIENCE'
+                    : cat.id === 'project'
+                    ? 'PROJECTS'
+                    : cat.id === 'leadership'
+                    ? 'LEADERSHIP'
+                    : 'SKILLS & HONORS';
                 return (
                   <button
                     key={cat.id}
@@ -184,7 +195,7 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
                         : 'bg-transparent text-white/70 border-white/20 hover:border-white'
                     }`}
                   >
-                    [ {cat.id} // {count} ]
+                    [ {shortLabel} // {count} ]
                   </button>
                 );
               })}
@@ -230,7 +241,7 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
                             isReverse ? 'lg:flex-row-reverse' : 'lg:flex-row'
                           } gap-6 sm:gap-8 lg:gap-12 items-stretch transition-transform duration-300`}
                         >
-                          {/* 1. VISUAL FRAME: Playboi Carti / 00PIUM High Contrast Monochrome with 'MUSIC' Stamp */}
+                          {/* 1. VISUAL FRAME: High Contrast Monochrome with 'MUSIC' Stamp */}
                           <div
                             onClick={() => onSelectArtifact?.(artifact)}
                             className="group relative w-full lg:w-5/12 aspect-[4/5] sm:aspect-[3/2] lg:aspect-[2/3] bg-black border border-white/25 hover:border-white transition-colors duration-200 overflow-hidden cursor-pointer flex-shrink-0"
@@ -249,7 +260,7 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
                               </span>
                             </div>
 
-                            {/* 'MUSIC' Cap / Brand Stamp (Centered or Top Badge) */}
+                            {/* 'MUSIC' Cap / Brand Stamp */}
                             <div className="absolute top-3 right-3 z-10">
                               <div
                                 className="bg-white text-black px-2.5 py-0.5 font-display font-[900] text-[13px] tracking-[-0.04em] uppercase"
@@ -269,7 +280,7 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
                             {/* Hover Quick Prompt */}
                             <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
                               <span className="font-mono text-xs text-white bg-black/80 px-4 py-2 border border-white/30 tracking-widest uppercase">
-                                CLICK TO INSPECT
+                                INSPECT DOSSIER
                               </span>
                             </div>
                           </div>
@@ -300,7 +311,7 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
 
                               {/* Title & Organization */}
                               <h4
-                                className="font-display font-[900] text-2xl sm:text-4xl text-white tracking-tight leading-[95%] uppercase mb-2 group-hover:translate-x-1 transition-transform"
+                                className="font-display font-[900] text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-[95%] uppercase mb-2 group-hover:translate-x-1 transition-transform"
                                 style={{ transform: 'scaleY(1.15)', transformOrigin: 'left' }}
                               >
                                 {artifact.title}
@@ -322,7 +333,7 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
                                 {artifact.bulletPoints.map((point, pIdx) => (
                                   <div
                                     key={pIdx}
-                                    className="font-mono text-[11px] sm:text-xs text-white/70 leading-normal flex items-start gap-2"
+                                    className="font-mono text-[11px] sm:text-xs text-white/75 leading-relaxed flex items-start gap-2"
                                   >
                                     <span className="text-white/40 select-none">›</span>
                                     <span>{point}</span>
