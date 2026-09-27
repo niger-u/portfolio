@@ -55,7 +55,7 @@ export const IndexDrawer: React.FC<IndexDrawerProps> = ({
 
       {/* Index List */}
       <div className="flex flex-col divide-y divide-white/10 max-w-5xl">
-        {ARCHIVE_ARTIFACTS.map((item, idx) => (
+        {ARCHIVE_ARTIFACTS.map((item) => (
           <div
             key={item.id}
             onClick={(e) => {
@@ -67,7 +67,7 @@ export const IndexDrawer: React.FC<IndexDrawerProps> = ({
           >
             <div className="flex items-baseline gap-4 sm:gap-8">
               <span className="font-mono text-xs text-white/40 tracking-widest group-hover:text-white">
-                00{idx + 1}
+                {item.serialNumber}
               </span>
               <span
                 className="font-display font-[800] text-lg sm:text-xl text-white tracking-tight uppercase group-hover:translate-x-2 transition-transform"
@@ -79,13 +79,11 @@ export const IndexDrawer: React.FC<IndexDrawerProps> = ({
 
             <div className="flex items-center gap-6 mt-2 md:mt-0">
               <span className="font-mono text-[11px] text-white/60 tracking-wider uppercase">
-                {item.category}
+                {item.categoryLabel}
               </span>
-              {item.year && (
-                <span className="font-mono text-[11px] text-white/40">
-                  {item.year}
-                </span>
-              )}
+              <span className="font-mono text-[11px] text-white/40">
+                {item.timeframe}
+              </span>
               <span className="font-mono text-xs text-white/40 group-hover:text-white">
                 [ + ]
               </span>

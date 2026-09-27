@@ -1,37 +1,10 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react';
-import { ARCHIVE_ARTIFACTS, ArchiveArtifact } from '../data/archiveData';
-
-interface CellItem {
-  artifactIndex: number; // -1 for empty spacer cell
-}
-
-function buildLayout(count: number, cols: number): CellItem[][] {
-  const rows: CellItem[][] = [];
-  let placedCount = 0;
-  let r = 0;
-
-  while (placedCount < count) {
-    const row: CellItem[] = Array.from({ length: cols }, () => ({ artifactIndex: -1 }));
-
-    // Primary column
-    const a = (r * 2 + (r % 2)) % cols;
-    row[a] = { artifactIndex: placedCount };
-    placedCount++;
-
-    // Every 3rd row, place a second image if available
-    if (r % 3 === 0 && placedCount < count) {
-      let b = (a + 2) % cols;
-      if (b === a) b = (a + 1) % cols;
-      row[b] = { artifactIndex: placedCount };
-      placedCount++;
-    }
-
-    rows.push(row);
-    r++;
-  }
-
-  return rows;
-}
+import {
+  ARCHIVE_ARTIFACTS,
+  CATEGORY_DEFINITIONS,
+  ArchiveArtifact,
+  ArchiveCategory,
+} from '../data/archiveData';
 
 interface VaultGalleryProps {
   onSelectArtifact?: (artifact: ArchiveArtifact) => void;
@@ -42,23 +15,12 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const [cols, setCols] = useState(4);
+  const [activeCategory, setActiveCategory] = useState<ArchiveCategory | 'all'>('all');
 
-  // Responsive column detection
-  useEffect(() => {
-    const updateCols = () => {
-      const w = window.innerWidth;
-      if (w < 640) setCols(2);
-      else if (w < 1024) setCols(3);
-      else setCols(4);
-    };
-
-    updateCols();
-    window.addEventListener('resize', updateCols);
-    return () => window.removeEventListener('resize', updateCols);
-  }, []);
-
-  const layout = useMemo(() => buildLayout(ARCHIVE_ARTIFACTS.length, cols), [cols]);
+  const filteredArtifacts = useMemo(() => {
+    if (activeCategory === 'all') return ARCHIVE_ARTIFACTS;
+    return ARCHIVE_ARTIFACTS.filter((a) => a.category === activeCategory);
+  }, [activeCategory]);
 
   useEffect(() => {
     const panel = panelRef.current;
@@ -104,14 +66,19 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
         const bottom = rect.bottom;
 
         if (bottom <= 0 || top >= vh) {
-          card.style.transform = 'scale(0)';
+          card.style.transform = 'scale(0.96)';
+          card.style.opacity = '0.3';
         } else {
           // Enter: scales from 0 to 1 as it enters viewport
-          const enter = Math.min(1, Math.max(0, (vh - top) / (vh * 0.6)));
+          const enter = Math.min(1, Math.max(0, (vh - top) / (vh * 0.4)));
           // Exit: scales from 1 to 0 as it exits top
-          const exit = Math.min(1, Math.max(0, bottom / (vh * 0.4)));
+          const exit = Math.min(1, Math.max(0, bottom / (vh * 0.3)));
           const finalScale = Math.min(enter, exit);
-          card.style.transform = `scale(${finalScale.toFixed(4)})`;
+          const clampedScale = Math.max(0.92, Math.min(1, 0.92 + 0.08 * finalScale));
+          const opacity = Math.max(0.3, Math.min(1, finalScale));
+
+          card.style.transform = `scale(${clampedScale.toFixed(4)})`;
+          card.style.opacity = `${opacity.toFixed(4)}`;
         }
       });
 
@@ -156,7 +123,7 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
     animId = requestAnimationFrame(tick);
 
     return () => cancelAnimationFrame(animId);
-  }, [layout, cols]);
+  }, [filteredArtifacts]);
 
   return (
     <div
@@ -171,87 +138,240 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
       {/* Inner Scroll Wrapper */}
       <div
         ref={wrapperRef}
-        className="w-full pt-[min(400px,40vh)] pb-[40vh] px-4 sm:px-8 lg:px-12"
+        className="w-full pt-[min(280px,28vh)] pb-[40vh] px-4 sm:px-8 lg:px-14"
         style={{ willChange: 'transform' }}
       >
-        {/* Anti-Design Grid */}
-        <div
-          className="grid gap-3 sm:gap-6 lg:gap-8 mx-auto max-w-[1720px]"
-          style={{
-            gridTemplateColumns: `repeat(${cols}, minmax(0, 1fr))`,
-          }}
-        >
-          {layout.map((row, rIdx) =>
-            row.map((cell, cIdx) => {
-              const key = `${rIdx}-${cIdx}`;
-              const isLeftHalf = cIdx < cols / 2;
-              const transformOrigin = isLeftHalf ? 'right bottom' : 'left bottom';
+        <div className="max-w-[1600px] mx-auto">
+          {/* Header & Quick Category Filter */}
+          <div className="mb-12 lg:mb-16 border-b border-white/20 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+              <div className="flex items-center gap-3 mb-2">
+                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+                <span className="font-mono text-xs tracking-widest uppercase text-white/60">
+                  HARSH VERMA // VAULT ARCHIVE
+                </span>
+              </div>
+              <h2
+                className="font-display font-[900] text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-none"
+                style={{ transform: 'scaleY(1.2)', transformOrigin: 'left bottom' }}
+              >
+                SELECTED WORKS &amp; DOSSIERS
+              </h2>
+            </div>
 
-              if (cell.artifactIndex === -1) {
-                // Empty spacer cell with exposed subtle hairline border
+            {/* Category Filter Pills */}
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setActiveCategory('all')}
+                className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
+                  activeCategory === 'all'
+                    ? 'bg-white text-black border-white'
+                    : 'bg-transparent text-white/70 border-white/20 hover:border-white'
+                }`}
+              >
+                [ ALL // {ARCHIVE_ARTIFACTS.length} ]
+              </button>
+              {CATEGORY_DEFINITIONS.map((cat) => {
+                const count = ARCHIVE_ARTIFACTS.filter((a) => a.category === cat.id).length;
+                const isSelected = activeCategory === cat.id;
                 return (
-                  <div
-                    key={key}
-                    className="w-full aspect-[2/3] border border-dashed border-white/[0.04] rounded-none pointer-events-none"
-                    aria-hidden="true"
-                  />
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
+                      isSelected
+                        ? 'bg-white text-black border-white'
+                        : 'bg-transparent text-white/70 border-white/20 hover:border-white'
+                    }`}
+                  >
+                    [ {cat.id} // {count} ]
+                  </button>
                 );
-              }
+              })}
+            </div>
+          </div>
 
-              const artifact = ARCHIVE_ARTIFACTS[cell.artifactIndex];
-              const cardIndex = cell.artifactIndex;
+          {/* Grouped Sections */}
+          <div className="space-y-24 sm:space-y-32">
+            {CATEGORY_DEFINITIONS.filter(
+              (cat) => activeCategory === 'all' || activeCategory === cat.id
+            ).map((cat) => {
+              const items = ARCHIVE_ARTIFACTS.filter((a) => a.category === cat.id);
+              if (items.length === 0) return null;
 
               return (
-                <div
-                  key={key}
-                  ref={(el) => {
-                    cardRefs.current[cardIndex] = el;
-                  }}
-                  onClick={() => onSelectArtifact?.(artifact)}
-                  className="bp-card group relative w-full aspect-[2/3] bg-black cursor-pointer overflow-hidden border border-white/[0.22] hover:border-white transition-colors duration-200"
-                  style={{
-                    transformOrigin,
-                    transform: 'scale(0)',
-                  }}
-                >
-                  {/* High Contrast Monochrome Image */}
-                  <img
-                    src={artifact.imageUrl}
-                    alt={artifact.title}
-                    loading="lazy"
-                    className="w-full h-full object-cover grayscale contrast-[125%] brightness-90 group-hover:scale-105 group-hover:contrast-[140%] transition-transform duration-700 ease-out"
-                  />
-
-                  {/* Corner Index Overlay (Top Left) */}
-                  <div className="absolute top-2 left-2 z-10 mix-blend-exclusion pointer-events-none">
-                    <span className="font-mono text-[9px] sm:text-[10px] text-white tracking-widest uppercase">
-                      {artifact.indexTag}
-                    </span>
-                  </div>
-
-                  {/* Crosshair Marker (Bottom Right) */}
-                  <div className="absolute bottom-2 right-2 z-10 mix-blend-exclusion pointer-events-none">
-                    <span className="font-mono text-[10px] text-white tracking-widest">
-                      [ + ]
-                    </span>
-                  </div>
-
-                  {/* Hover Caption Details */}
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-4 flex flex-col justify-end">
-                    <span className="font-mono text-[10px] text-white/70 uppercase tracking-wider mb-1">
-                      {artifact.category}
-                    </span>
-                    <h3 className="font-display font-[800] text-sm sm:text-base text-white tracking-tight uppercase leading-snug">
-                      {artifact.title}
+                <section key={cat.id} className="relative">
+                  {/* Category Divider Header */}
+                  <div className="border-t border-white/20 pt-6 mb-10 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                    <h3
+                      className="font-display font-[900] text-xl sm:text-3xl text-white tracking-tight uppercase"
+                      style={{ transform: 'scaleY(1.18)', transformOrigin: 'left' }}
+                    >
+                      {cat.title}
                     </h3>
-                    <p className="font-mono text-[10px] text-white/80 line-clamp-2 mt-1 leading-relaxed">
-                      {artifact.description}
-                    </p>
+                    <span className="font-mono text-[11px] sm:text-xs text-white/50 tracking-widest uppercase">
+                      {cat.subtitle}
+                    </span>
                   </div>
-                </div>
+
+                  {/* Artifacts in this Category: Visual + Clickable Dossier Box Pairing */}
+                  <div className="space-y-12 sm:space-y-16">
+                    {items.map((artifact, itemIdx) => {
+                      const globalIdx = ARCHIVE_ARTIFACTS.findIndex((a) => a.id === artifact.id);
+                      const isReverse = itemIdx % 2 === 1;
+
+                      return (
+                        <div
+                          key={artifact.id}
+                          ref={(el) => {
+                            cardRefs.current[globalIdx] = el;
+                          }}
+                          className={`bp-card flex flex-col ${
+                            isReverse ? 'lg:flex-row-reverse' : 'lg:flex-row'
+                          } gap-6 sm:gap-8 lg:gap-12 items-stretch transition-transform duration-300`}
+                        >
+                          {/* 1. VISUAL FRAME: Playboi Carti / 00PIUM High Contrast Monochrome with 'MUSIC' Stamp */}
+                          <div
+                            onClick={() => onSelectArtifact?.(artifact)}
+                            className="group relative w-full lg:w-5/12 aspect-[4/5] sm:aspect-[3/2] lg:aspect-[2/3] bg-black border border-white/25 hover:border-white transition-colors duration-200 overflow-hidden cursor-pointer flex-shrink-0"
+                          >
+                            <img
+                              src={artifact.imageUrl}
+                              alt={artifact.title}
+                              loading="lazy"
+                              className="w-full h-full object-cover grayscale contrast-[135%] brightness-90 group-hover:scale-105 group-hover:contrast-[150%] transition-transform duration-700 ease-out"
+                            />
+
+                            {/* Corner Serial Overlay (Top Left) */}
+                            <div className="absolute top-3 left-3 z-10 mix-blend-exclusion pointer-events-none">
+                              <span className="font-mono text-[10px] text-white tracking-widest uppercase">
+                                [ {artifact.serialNumber} // ARTIFACT ]
+                              </span>
+                            </div>
+
+                            {/* 'MUSIC' Cap / Brand Stamp (Centered or Top Badge) */}
+                            <div className="absolute top-3 right-3 z-10">
+                              <div
+                                className="bg-white text-black px-2.5 py-0.5 font-display font-[900] text-[13px] tracking-[-0.04em] uppercase"
+                                style={{ transform: 'scaleY(1.25)' }}
+                              >
+                                {artifact.capLabel || 'MUSIC'}
+                              </div>
+                            </div>
+
+                            {/* Bottom Right Reticle Crosshair */}
+                            <div className="absolute bottom-3 right-3 z-10 mix-blend-exclusion pointer-events-none">
+                              <span className="font-mono text-xs text-white tracking-widest">
+                                [ + ]
+                              </span>
+                            </div>
+
+                            {/* Hover Quick Prompt */}
+                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+                              <span className="font-mono text-xs text-white bg-black/80 px-4 py-2 border border-white/30 tracking-widest uppercase">
+                                CLICK TO INSPECT
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* 2. CLICKABLE PORTFOLIO DOSSIER BOX */}
+                          <div
+                            onClick={() => onSelectArtifact?.(artifact)}
+                            className="group relative w-full lg:w-7/12 bg-black border border-white/20 hover:border-white p-6 sm:p-8 lg:p-10 flex flex-col justify-between cursor-pointer transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.06)]"
+                          >
+                            {/* Top Meta Row */}
+                            <div>
+                              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                                <div className="flex items-center gap-2">
+                                  <span className="px-2 py-0.5 bg-white/10 text-white font-mono text-[10px] tracking-widest uppercase border border-white/20">
+                                    {artifact.categoryLabel}
+                                  </span>
+                                  {artifact.status === 'ACTIVE' && (
+                                    <span className="flex items-center gap-1.5 px-2 py-0.5 bg-emerald-950/80 text-emerald-400 font-mono text-[10px] tracking-wider uppercase border border-emerald-500/40">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                                      CURRENT
+                                    </span>
+                                  )}
+                                </div>
+                                <span className="font-mono text-[11px] text-white/50 tracking-wider">
+                                  {artifact.timeframe}
+                                </span>
+                              </div>
+
+                              {/* Title & Organization */}
+                              <h4
+                                className="font-display font-[900] text-2xl sm:text-4xl text-white tracking-tight leading-[95%] uppercase mb-2 group-hover:translate-x-1 transition-transform"
+                                style={{ transform: 'scaleY(1.15)', transformOrigin: 'left' }}
+                              >
+                                {artifact.title}
+                              </h4>
+                              <div className="font-mono text-xs text-white/70 tracking-wide uppercase mb-6">
+                                {artifact.role} —{' '}
+                                <span className="text-white font-semibold">
+                                  {artifact.organization}
+                                </span>
+                              </div>
+
+                              {/* Short Summary */}
+                              <p className="font-mono text-xs sm:text-sm text-white/80 leading-relaxed mb-6">
+                                {artifact.shortSummary}
+                              </p>
+
+                              {/* Structured Deliverables / Highlights */}
+                              <div className="space-y-2 mb-6 border-l border-white/20 pl-4 py-1">
+                                {artifact.bulletPoints.map((point, pIdx) => (
+                                  <div
+                                    key={pIdx}
+                                    className="font-mono text-[11px] sm:text-xs text-white/70 leading-normal flex items-start gap-2"
+                                  >
+                                    <span className="text-white/40 select-none">›</span>
+                                    <span>{point}</span>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            {/* Bottom Row: Tools & Action Buttons */}
+                            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                              {/* Capabilities / Tools Pills */}
+                              <div className="flex flex-wrap gap-1.5">
+                                {artifact.tools.map((tool) => (
+                                  <span
+                                    key={tool}
+                                    className="px-2 py-0.5 font-mono text-[10px] text-white/60 bg-white/[0.03] border border-white/10 uppercase tracking-wider"
+                                  >
+                                    {tool}
+                                  </span>
+                                ))}
+                              </div>
+
+                              {/* Action Trigger */}
+                              <div className="flex items-center gap-3 self-end sm:self-auto flex-shrink-0">
+                                {artifact.link && (
+                                  <a
+                                    href={artifact.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}
+                                    className="font-mono text-xs text-white/70 hover:text-white px-3 py-1.5 border border-white/30 hover:border-white uppercase tracking-wider transition-colors"
+                                  >
+                                    VISIT ↗
+                                  </a>
+                                )}
+                                <span className="font-mono text-xs text-black bg-white group-hover:bg-neutral-200 px-3 py-1.5 uppercase font-bold tracking-wider transition-colors">
+                                  INSPECT DOSSIER →
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </section>
               );
-            })
-          )}
+            })}
+          </div>
         </div>
       </div>
     </div>
