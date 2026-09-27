@@ -28,7 +28,7 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
 
   return (
     <>
-      {/* 1B. Logo / Wordmark (Top Left) */}
+      {/* 1B. Logo / Wordmark (Top Left) — HARSH VERMA instead of 00PIUM */}
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
@@ -36,23 +36,23 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
         className="fixed top-4 left-4 lg:top-8 lg:left-8 z-20 pointer-events-none select-none"
         style={{ mixBlendMode: 'exclusion' }}
       >
-        <div className="w-[140px] sm:w-[280px] lg:w-[380px]">
-          <svg viewBox="0 0 355 110" fill="none" className="w-full h-auto">
-            {/* 00PIUM / HARSH VERMA STRETCHED BRUTALIST LOCKUP */}
+        <div className="w-[180px] sm:w-[320px] lg:w-[480px]">
+          <svg viewBox="0 0 480 110" fill="none" className="w-full h-auto">
+            {/* HARSH VERMA STRETCHED BRUTALIST LOCKUP */}
             <text
               x="0"
               y="58"
               fill="#FFFFFF"
               fontFamily="'Inter Tight', sans-serif"
               fontWeight="900"
-              fontSize="64"
-              letterSpacing="-0.06em"
+              fontSize="54"
+              letterSpacing="-0.05em"
               style={{ transform: 'scaleY(1.25)' }}
             >
-              00PIUM
+              HARSH VERMA
             </text>
             <text
-              x="268"
+              x="430"
               y="28"
               fill="#FFFFFF"
               fontFamily="'JetBrains Mono', monospace"
@@ -64,15 +64,15 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
             </text>
             <text
               x="2"
-              y="102"
+              y="98"
               fill="#FFFFFF"
               fontFamily="'Inter Tight', sans-serif"
               fontWeight="800"
-              fontSize="20"
-              letterSpacing="-0.03em"
+              fontSize="18"
+              letterSpacing="-0.02em"
               style={{ transform: 'scaleY(1.15)' }}
             >
-              HARSH VERMA // PRODUCT &amp; SYSTEMS
+              PRODUCT STRATEGY &amp; SYSTEMS ENGINEERING
             </text>
           </svg>
         </div>
@@ -222,7 +222,7 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
           HARSH VERMA — {PROFILE_INFO.email} | {PROFILE_INFO.phone}
         </span>
         <span className="font-mono font-[500] text-[10px] lg:text-[11px] tracking-[0.03em] uppercase text-white">
-          [ CHEMICAL ENG @ JADAVPUR UNIV '28 // 00PIUM ARCHIVE ]
+          [ CHEMICAL ENG @ JADAVPUR UNIV '28 // DIGITAL ARCHIVE ]
         </span>
       </footer>
     </>
