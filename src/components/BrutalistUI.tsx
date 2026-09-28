@@ -93,10 +93,10 @@ export const HeroUI: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.45 }}
-        className="absolute z-10 pointer-events-none select-none flex flex-col items-center max-lg:left-0 max-lg:right-0 max-lg:bottom-12 lg:right-8 lg:bottom-20 lg:w-[380px]"
+        className="absolute z-10 pointer-events-none select-none flex flex-col items-center max-lg:left-0 max-lg:right-0 max-lg:bottom-12 lg:right-8 lg:bottom-16"
         style={{ mixBlendMode: 'exclusion' }}
       >
-        <div className="flex flex-col items-center lg:items-start w-[270px] lg:w-full mb-3 lg:mb-7">
+        <div className="flex flex-col items-center lg:items-start">
           {/* Rotating Cryptic Circle Sigil */}
           <div className="relative w-6 h-6 lg:w-[34px] lg:h-[34px] mb-2 lg:mb-3">
             <svg viewBox="0 0 40 40" className="w-full h-full">
@@ -118,20 +118,13 @@ export const HeroUI: React.FC = () => {
           </div>
 
           <div
-            className="font-display font-[800] text-[16px] lg:text-[20px] leading-[95%] text-center lg:text-left tracking-[-0.05em] uppercase text-white"
+            className="font-display font-[800] text-[18px] lg:text-[24px] leading-[98%] text-center lg:text-left tracking-[-0.04em] uppercase text-white"
             style={{ transform: 'scaleY(1.15)' }}
           >
             BUILDING IN STEALTH // '26
             <br />
             KOLKATA // WORLDWIDE
           </div>
-        </div>
-
-        <div
-          className="font-display font-[900] text-[42px] sm:text-[54px] lg:text-[72px] leading-[95%] text-center lg:text-left tracking-[-0.06em] text-white whitespace-nowrap"
-          style={{ transform: 'scaleY(1.2)' }}
-        >
-          * SCHYEAH *
         </div>
       </motion.div>
     </>

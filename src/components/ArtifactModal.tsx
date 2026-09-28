@@ -30,11 +30,21 @@ export const ArtifactModal: React.FC<ArtifactModalProps> = ({ artifact, onClose 
         </button>
 
         {/* Image Preview with 'MUSIC' Stamp */}
-        <div className="w-full md:w-5/12 aspect-[4/5] sm:aspect-[2/3] border border-white/25 overflow-hidden relative flex-shrink-0">
+        <div className="w-full md:w-5/12 aspect-[4/5] sm:aspect-[2/3] border border-white/25 overflow-hidden relative flex-shrink-0 bg-black flex items-center justify-center">
+          {artifact.imageFit === 'contain' && (
+            <div
+              className="absolute inset-0 bg-cover bg-center blur-2xl opacity-20 scale-125 pointer-events-none"
+              style={{ backgroundImage: `url(${artifact.imageUrl})` }}
+            />
+          )}
           <img
             src={artifact.imageUrl}
             alt={artifact.title}
-            className="w-full h-full object-cover grayscale contrast-[135%] brightness-90"
+            className={`relative z-1 ${
+              artifact.imageFit === 'contain'
+                ? 'max-w-[75%] max-h-[75%] object-contain'
+                : 'w-full h-full object-cover'
+            } grayscale contrast-[135%] brightness-90`}
           />
           <div className="absolute top-2 left-2 z-10 mix-blend-exclusion">
             <span className="font-mono text-[10px] text-white tracking-widest uppercase">

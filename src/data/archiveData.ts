@@ -13,6 +13,7 @@ export interface ArchiveArtifact {
   bulletPoints: string[];
   tools: string[];
   imageUrl: string;
+  imageFit?: 'contain' | 'cover';
   capLabel?: string;
   link?: string;
   status: 'ACTIVE' | 'COMPLETED' | 'FEATURED';
@@ -62,9 +63,9 @@ export const ARCHIVE_ARTIFACTS: ArchiveArtifact[] = [
     id: 'stealth-startup',
     serialNumber: '000',
     category: 'experience',
-    categoryLabel: 'STEALTH VENTURE // FOUNDER',
+    categoryLabel: 'STEALTH VENTURE // FOUNDING TEAM',
     title: 'CONFIDENTIAL CONSUMER VENTURE',
-    role: 'Founder & Builder',
+    role: 'Founding Team',
     organization: '[CONFIDENTIAL] // STEALTH STARTUP',
     timeframe: '2026 – PRESENT',
     shortSummary:
@@ -101,8 +102,8 @@ export const ARCHIVE_ARTIFACTS: ArchiveArtifact[] = [
       'Tested and resolved 20+ UX bottlenecks alongside the engineering team prior to rollout.',
     ],
     tools: ['Founder’s Office', '15% Conversion Loops', 'User Discovery', 'Product QA', 'Growth Ops'],
-    imageUrl:
-      'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: './hiredue-logo.jpeg',
+    imageFit: 'contain',
     capLabel: 'MUSIC',
     status: 'COMPLETED',
     isFeatured: true,
@@ -124,8 +125,8 @@ export const ARCHIVE_ARTIFACTS: ArchiveArtifact[] = [
       'Formulated the commercial rollout blueprint bridging grassroots craftspeople with modern retail channels.',
     ],
     tools: ['Market Feasibility', 'Unit Economics', 'Vendor Negotiation', 'Artisanal Commerce', 'Retail Testing'],
-    imageUrl:
-      'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: './iitr-logo.png',
+    imageFit: 'contain',
     capLabel: 'MUSIC',
     status: 'COMPLETED',
     isFeatured: true,
@@ -197,8 +198,8 @@ export const ARCHIVE_ARTIFACTS: ArchiveArtifact[] = [
       'Mentored student cohorts to top national finishes, including AIR 16 and AIR 17 in JEE Mains 2026.',
     ],
     tools: ['Viral Growth Loops', 'Community Scale (40k+)', 'Cohort Retention', 'Peer Mentorship'],
-    imageUrl:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: './unboxed-logo.jpeg',
+    imageFit: 'contain',
     capLabel: 'MUSIC',
     status: 'COMPLETED',
     isFeatured: true,
@@ -220,8 +221,8 @@ export const ARCHIVE_ARTIFACTS: ArchiveArtifact[] = [
       'Instituted transparent financial reconciliation and milestone-driven vendor payouts.',
     ],
     tools: ['Treasury Management', 'Sponsorship Closing', 'Financial Modeling', 'Event Governance'],
-    imageUrl:
-      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: './juds-logo.jpeg',
+    imageFit: 'contain',
     capLabel: 'MUSIC',
     link: 'https://www.instagram.com/judebatingsociety/',
     status: 'ACTIVE',
@@ -244,8 +245,8 @@ export const ARCHIVE_ARTIFACTS: ArchiveArtifact[] = [
       'Standardized design assets and brand guidelines across social channels and live event stages.',
     ],
     tools: ['Creative Direction', 'Campaign Design', 'Attendee Acquisition', 'Event Branding'],
-    imageUrl:
-      'https://images.unsplash.com/photo-1541701494587-cb58502866ab?q=80&w=1200&auto=format&fit=crop',
+    imageUrl: './ieee-logo.jpeg',
+    imageFit: 'contain',
     capLabel: 'MUSIC',
     link: 'https://www.instagram.com/_ieeeju/',
     status: 'ACTIVE',

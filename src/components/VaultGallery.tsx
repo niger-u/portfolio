@@ -146,13 +146,23 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
         {/* 1. VISUAL FRAME: High Contrast Monochrome with 'MUSIC' Stamp */}
         <div
           onClick={() => onSelectArtifact?.(artifact)}
-          className="group relative w-full lg:w-5/12 aspect-[4/5] sm:aspect-[3/2] lg:aspect-[2/3] bg-black border border-white/25 hover:border-white transition-colors duration-200 overflow-hidden cursor-pointer flex-shrink-0"
+          className="group relative w-full lg:w-5/12 aspect-[4/5] sm:aspect-[3/2] lg:aspect-[2/3] bg-black border border-white/25 hover:border-white transition-colors duration-200 overflow-hidden cursor-pointer flex-shrink-0 flex items-center justify-center"
         >
+          {artifact.imageFit === 'contain' && (
+            <div
+              className="absolute inset-0 bg-cover bg-center blur-2xl opacity-20 scale-125 pointer-events-none"
+              style={{ backgroundImage: `url(${artifact.imageUrl})` }}
+            />
+          )}
           <img
             src={artifact.imageUrl}
             alt={artifact.title}
             loading="lazy"
-            className="w-full h-full object-cover grayscale contrast-[135%] brightness-90 group-hover:scale-105 group-hover:contrast-[150%] transition-transform duration-700 ease-out"
+            className={`relative z-1 ${
+              artifact.imageFit === 'contain'
+                ? 'max-w-[70%] max-h-[70%] object-contain'
+                : 'w-full h-full object-cover'
+            } grayscale contrast-[135%] brightness-90 group-hover:scale-105 group-hover:contrast-[150%] transition-transform duration-700 ease-out`}
           />
 
           {/* Corner Serial Overlay (Top Left) */}
