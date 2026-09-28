@@ -3,7 +3,6 @@ import {
   ARCHIVE_ARTIFACTS,
   CATEGORY_DEFINITIONS,
   ArchiveArtifact,
-  ArchiveCategory,
 } from '../data/archiveData';
 
 interface VaultGalleryProps {
@@ -15,10 +14,16 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
   const wrapperRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  const [activeCategory, setActiveCategory] = useState<ArchiveCategory | 'all'>('all');
+  type FilterTab = 'featured' | 'experience' | 'project' | 'leadership' | 'skills' | 'all';
+  const [activeCategory, setActiveCategory] = useState<FilterTab>('featured');
 
   const filteredArtifacts = useMemo(() => {
-    if (activeCategory === 'all') return ARCHIVE_ARTIFACTS;
+    if (activeCategory === 'featured') {
+      return ARCHIVE_ARTIFACTS.filter((a) => a.isFeatured);
+    }
+    if (activeCategory === 'all') {
+      return ARCHIVE_ARTIFACTS;
+    }
     return ARCHIVE_ARTIFACTS.filter((a) => a.category === activeCategory);
   }, [activeCategory]);
 
@@ -125,6 +130,160 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
     return () => cancelAnimationFrame(animId);
   }, [filteredArtifacts]);
 
+  const renderCard = (artifact: ArchiveArtifact, itemIdx: number) => {
+    const isReverse = itemIdx % 2 === 1;
+
+    return (
+      <div
+        key={artifact.id}
+        ref={(el) => {
+          cardRefs.current[itemIdx] = el;
+        }}
+        className={`bp-card flex flex-col ${
+          isReverse ? 'lg:flex-row-reverse' : 'lg:flex-row'
+        } gap-6 sm:gap-8 lg:gap-12 items-stretch transition-transform duration-300`}
+      >
+        {/* 1. VISUAL FRAME: High Contrast Monochrome with 'MUSIC' Stamp */}
+        <div
+          onClick={() => onSelectArtifact?.(artifact)}
+          className="group relative w-full lg:w-5/12 aspect-[4/5] sm:aspect-[3/2] lg:aspect-[2/3] bg-black border border-white/25 hover:border-white transition-colors duration-200 overflow-hidden cursor-pointer flex-shrink-0"
+        >
+          <img
+            src={artifact.imageUrl}
+            alt={artifact.title}
+            loading="lazy"
+            className="w-full h-full object-cover grayscale contrast-[135%] brightness-90 group-hover:scale-105 group-hover:contrast-[150%] transition-transform duration-700 ease-out"
+          />
+
+          {/* Corner Serial Overlay (Top Left) */}
+          <div className="absolute top-3 left-3 z-10 mix-blend-exclusion pointer-events-none">
+            <span className="font-mono text-[10px] text-white tracking-widest uppercase">
+              [ {artifact.serialNumber} // {artifact.id === 'stealth-startup' ? 'ACTIVE STEALTH' : 'ARCHIVE'} ]
+            </span>
+          </div>
+
+          {/* 'MUSIC' Cap / Brand Stamp */}
+          <div className="absolute top-3 right-3 z-10">
+            <div
+              className="bg-white text-black px-2.5 py-0.5 font-display font-[900] text-[13px] tracking-[-0.04em] uppercase"
+              style={{ transform: 'scaleY(1.25)' }}
+            >
+              {artifact.capLabel || 'MUSIC'}
+            </div>
+          </div>
+
+          {/* Bottom Right Reticle Crosshair */}
+          <div className="absolute bottom-3 right-3 z-10 mix-blend-exclusion pointer-events-none">
+            <span className="font-mono text-xs text-white tracking-widest">
+              [ + ]
+            </span>
+          </div>
+
+          {/* Hover Quick Prompt */}
+          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
+            <span className="font-mono text-xs text-white bg-black/80 px-4 py-2 border border-white/30 tracking-widest uppercase">
+              EXPLORE ARTIFACT
+            </span>
+          </div>
+        </div>
+
+        {/* 2. CLICKABLE PORTFOLIO DOSSIER BOX */}
+        <div
+          onClick={() => onSelectArtifact?.(artifact)}
+          className="group relative w-full lg:w-7/12 bg-black border border-white/20 hover:border-white p-6 sm:p-8 lg:p-10 flex flex-col justify-between cursor-pointer transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.06)]"
+        >
+          {/* Top Meta Row */}
+          <div>
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 bg-white/10 text-white font-mono text-[10px] tracking-widest uppercase border border-white/20">
+                  {artifact.categoryLabel}
+                </span>
+                {artifact.status === 'ACTIVE' && (
+                  <span className="flex items-center gap-1.5 px-2 py-0.5 bg-emerald-950/80 text-emerald-400 font-mono text-[10px] tracking-wider uppercase border border-emerald-500/40">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                    {artifact.id === 'stealth-startup' ? 'CURRENT STEALTH' : 'CURRENT'}
+                  </span>
+                )}
+              </div>
+              <span className="font-mono text-[11px] text-white/50 tracking-wider">
+                {artifact.timeframe}
+              </span>
+            </div>
+
+            {/* COMPANY / ORGANIZATION NAME FIRST - PROMINENT HEADLINE */}
+            <h4
+              className="font-display font-[900] text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight leading-[95%] uppercase mb-2 group-hover:translate-x-1 transition-transform"
+              style={{ transform: 'scaleY(1.15)', transformOrigin: 'left' }}
+            >
+              {artifact.organization}
+            </h4>
+
+            {/* Role & Specific Initiative Directly Underneath */}
+            <div className="font-mono text-xs sm:text-sm text-white/70 tracking-wide uppercase mb-6 flex flex-wrap items-center gap-2">
+              <span className="text-white font-bold">{artifact.role}</span>
+              <span className="text-white/30">•</span>
+              <span className="text-white/60">{artifact.title}</span>
+            </div>
+
+            {/* Short Concise Narrative */}
+            <p className="font-mono text-xs sm:text-sm text-white/85 leading-relaxed mb-6">
+              {artifact.shortSummary}
+            </p>
+
+            {/* Structured Highlights */}
+            <div className="space-y-2 mb-6 border-l border-white/20 pl-4 py-1">
+              {artifact.bulletPoints.map((point, pIdx) => (
+                <div
+                  key={pIdx}
+                  className="font-mono text-[11px] sm:text-xs text-white/75 leading-relaxed flex items-start gap-2"
+                >
+                  <span className="text-white/40 select-none">›</span>
+                  <span>{point}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom Row: Tools & Action Buttons */}
+          <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            {/* Capabilities / Tools Pills */}
+            <div className="flex flex-wrap gap-1.5">
+              {artifact.tools.map((tool) => (
+                <span
+                  key={tool}
+                  className="px-2 py-0.5 font-mono text-[10px] text-white/60 bg-white/[0.03] border border-white/10 uppercase tracking-wider"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
+
+            {/* Action Trigger */}
+            <div className="flex items-center gap-3 self-end sm:self-auto flex-shrink-0">
+              {artifact.link && (
+                <a
+                  href={artifact.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                  className="font-mono text-xs text-white/70 hover:text-white px-3 py-1.5 border border-white/30 hover:border-white uppercase tracking-wider transition-colors"
+                >
+                  VISIT ↗
+                </a>
+              )}
+              <span className="font-mono text-xs text-black bg-white group-hover:bg-neutral-200 px-3 py-1.5 uppercase font-bold tracking-wider transition-colors">
+                EXPLORE ARTIFACT →
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const featuredCount = ARCHIVE_ARTIFACTS.filter((a) => a.isFeatured).length;
+
   return (
     <div
       ref={panelRef}
@@ -146,242 +305,152 @@ export const VaultGallery: React.FC<VaultGalleryProps> = ({ onSelectArtifact }) 
           <div className="mb-12 lg:mb-16 border-b border-white/20 pb-6 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
               <div className="flex items-center gap-3 mb-2">
-                <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
-                <span className="font-mono text-xs tracking-widest uppercase text-white/60">
-                  HARSH VERMA // VAULT DOSSIER
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-mono text-xs tracking-widest uppercase text-white/70">
+                  HARSH VERMA // 00 ARCHIVE
                 </span>
               </div>
               <h2
                 className="font-display font-[900] text-3xl sm:text-5xl lg:text-6xl text-white tracking-tight uppercase leading-none"
                 style={{ transform: 'scaleY(1.2)', transformOrigin: 'left bottom' }}
               >
-                PRODUCT, STRATEGY &amp; SYSTEMS
+                SELECTED BUILDS &amp; ARCHIVES
               </h2>
               <p className="font-mono text-xs text-white/50 tracking-wider uppercase mt-3">
-                PRODUCT MANAGEMENT // DATA WORKFLOWS // STRATEGY &amp; GTM // CHEMICAL ENG @ JU '28
+                FOUNDER IN STEALTH • EXPERIMENTS • WORKFLOWS • METRICS THAT MATTER
               </p>
             </div>
 
-            {/* Category Filter Pills */}
+            {/* Category Filter Tabs */}
             <div className="flex flex-wrap items-center gap-2">
+              <button
+                onClick={() => setActiveCategory('featured')}
+                className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
+                  activeCategory === 'featured'
+                    ? 'bg-white text-black border-white font-bold'
+                    : 'bg-transparent text-white/70 border-white/20 hover:border-white'
+                }`}
+              >
+                [ ★ FEATURED // {featuredCount} ]
+              </button>
+
+              <button
+                onClick={() => setActiveCategory('experience')}
+                className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
+                  activeCategory === 'experience'
+                    ? 'bg-white text-black border-white font-bold'
+                    : 'bg-transparent text-white/70 border-white/20 hover:border-white'
+                }`}
+              >
+                [ EXPERIENCE // {ARCHIVE_ARTIFACTS.filter((a) => a.category === 'experience').length} ]
+              </button>
+
+              <button
+                onClick={() => setActiveCategory('project')}
+                className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
+                  activeCategory === 'project'
+                    ? 'bg-white text-black border-white font-bold'
+                    : 'bg-transparent text-white/70 border-white/20 hover:border-white'
+                }`}
+              >
+                [ PROJECTS // {ARCHIVE_ARTIFACTS.filter((a) => a.category === 'project').length} ]
+              </button>
+
+              <button
+                onClick={() => setActiveCategory('leadership')}
+                className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
+                  activeCategory === 'leadership'
+                    ? 'bg-white text-black border-white font-bold'
+                    : 'bg-transparent text-white/70 border-white/20 hover:border-white'
+                }`}
+              >
+                [ LEADERSHIP // {ARCHIVE_ARTIFACTS.filter((a) => a.category === 'leadership').length} ]
+              </button>
+
+              <button
+                onClick={() => setActiveCategory('skills')}
+                className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
+                  activeCategory === 'skills'
+                    ? 'bg-white text-black border-white font-bold'
+                    : 'bg-transparent text-white/70 border-white/20 hover:border-white'
+                }`}
+              >
+                [ SKILLS &amp; HONORS // {ARCHIVE_ARTIFACTS.filter((a) => a.category === 'skills').length} ]
+              </button>
+
               <button
                 onClick={() => setActiveCategory('all')}
                 className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
                   activeCategory === 'all'
-                    ? 'bg-white text-black border-white'
+                    ? 'bg-white text-black border-white font-bold'
                     : 'bg-transparent text-white/70 border-white/20 hover:border-white'
                 }`}
               >
                 [ ALL // {ARCHIVE_ARTIFACTS.length} ]
               </button>
-              {CATEGORY_DEFINITIONS.map((cat) => {
-                const count = ARCHIVE_ARTIFACTS.filter((a) => a.category === cat.id).length;
-                const isSelected = activeCategory === cat.id;
-                const shortLabel =
-                  cat.id === 'experience'
-                    ? 'EXPERIENCE'
-                    : cat.id === 'project'
-                    ? 'PROJECTS'
-                    : cat.id === 'leadership'
-                    ? 'LEADERSHIP'
-                    : 'SKILLS & HONORS';
-                return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveCategory(cat.id)}
-                    className={`font-mono text-xs px-3 py-1.5 uppercase tracking-wider border transition-all cursor-pointer ${
-                      isSelected
-                        ? 'bg-white text-black border-white'
-                        : 'bg-transparent text-white/70 border-white/20 hover:border-white'
-                    }`}
-                  >
-                    [ {shortLabel} // {count} ]
-                  </button>
-                );
-              })}
             </div>
           </div>
 
           {/* Grouped Sections */}
           <div className="space-y-24 sm:space-y-32">
-            {CATEGORY_DEFINITIONS.filter(
-              (cat) => activeCategory === 'all' || activeCategory === cat.id
-            ).map((cat) => {
-              const items = ARCHIVE_ARTIFACTS.filter((a) => a.category === cat.id);
-              if (items.length === 0) return null;
-
-              return (
-                <section key={cat.id} className="relative">
-                  {/* Category Divider Header */}
-                  <div className="border-t border-white/20 pt-6 mb-10 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+            {activeCategory === 'featured' ? (
+              <section className="relative">
+                {/* Featured Section Header */}
+                <div className="border-t border-white/20 pt-6 mb-10 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                      <span className="font-mono text-[10px] text-emerald-400 tracking-widest uppercase">
+                        NOW ACTIVE // STEALTH MODE
+                      </span>
+                    </div>
                     <h3
                       className="font-display font-[900] text-xl sm:text-3xl text-white tracking-tight uppercase"
                       style={{ transform: 'scaleY(1.18)', transformOrigin: 'left' }}
                     >
-                      {cat.title}
+                      // 00 FEATURED VENTURES &amp; STANDOUT BUILDS
                     </h3>
-                    <span className="font-mono text-[11px] sm:text-xs text-white/50 tracking-widest uppercase">
-                      {cat.subtitle}
-                    </span>
                   </div>
+                  <span className="font-mono text-[11px] sm:text-xs text-white/50 tracking-widest uppercase">
+                    CURRENT STEALTH VENTURE • 40K SCALE • COMMERCIAL FEASIBILITY
+                  </span>
+                </div>
 
-                  {/* Artifacts in this Category: Visual + Clickable Dossier Box Pairing */}
-                  <div className="space-y-12 sm:space-y-16">
-                    {items.map((artifact, itemIdx) => {
-                      const globalIdx = ARCHIVE_ARTIFACTS.findIndex((a) => a.id === artifact.id);
-                      const isReverse = itemIdx % 2 === 1;
+                {/* Artifacts in Featured */}
+                <div className="space-y-12 sm:space-y-16">
+                  {filteredArtifacts.map((artifact, itemIdx) => renderCard(artifact, itemIdx))}
+                </div>
+              </section>
+            ) : (
+              CATEGORY_DEFINITIONS.filter(
+                (cat) => activeCategory === 'all' || activeCategory === cat.id
+              ).map((cat) => {
+                const items = ARCHIVE_ARTIFACTS.filter((a) => a.category === cat.id);
+                if (items.length === 0) return null;
 
-                      return (
-                        <div
-                          key={artifact.id}
-                          ref={(el) => {
-                            cardRefs.current[globalIdx] = el;
-                          }}
-                          className={`bp-card flex flex-col ${
-                            isReverse ? 'lg:flex-row-reverse' : 'lg:flex-row'
-                          } gap-6 sm:gap-8 lg:gap-12 items-stretch transition-transform duration-300`}
-                        >
-                          {/* 1. VISUAL FRAME: High Contrast Monochrome with 'MUSIC' Stamp */}
-                          <div
-                            onClick={() => onSelectArtifact?.(artifact)}
-                            className="group relative w-full lg:w-5/12 aspect-[4/5] sm:aspect-[3/2] lg:aspect-[2/3] bg-black border border-white/25 hover:border-white transition-colors duration-200 overflow-hidden cursor-pointer flex-shrink-0"
-                          >
-                            <img
-                              src={artifact.imageUrl}
-                              alt={artifact.title}
-                              loading="lazy"
-                              className="w-full h-full object-cover grayscale contrast-[135%] brightness-90 group-hover:scale-105 group-hover:contrast-[150%] transition-transform duration-700 ease-out"
-                            />
+                return (
+                  <section key={cat.id} className="relative">
+                    {/* Category Divider Header */}
+                    <div className="border-t border-white/20 pt-6 mb-10 flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
+                      <h3
+                        className="font-display font-[900] text-xl sm:text-3xl text-white tracking-tight uppercase"
+                        style={{ transform: 'scaleY(1.18)', transformOrigin: 'left' }}
+                      >
+                        {cat.title}
+                      </h3>
+                      <span className="font-mono text-[11px] sm:text-xs text-white/50 tracking-widest uppercase">
+                        {cat.subtitle}
+                      </span>
+                    </div>
 
-                            {/* Corner Serial Overlay (Top Left) */}
-                            <div className="absolute top-3 left-3 z-10 mix-blend-exclusion pointer-events-none">
-                              <span className="font-mono text-[10px] text-white tracking-widest uppercase">
-                                [ {artifact.serialNumber} // ARTIFACT ]
-                              </span>
-                            </div>
-
-                            {/* 'MUSIC' Cap / Brand Stamp */}
-                            <div className="absolute top-3 right-3 z-10">
-                              <div
-                                className="bg-white text-black px-2.5 py-0.5 font-display font-[900] text-[13px] tracking-[-0.04em] uppercase"
-                                style={{ transform: 'scaleY(1.25)' }}
-                              >
-                                {artifact.capLabel || 'MUSIC'}
-                              </div>
-                            </div>
-
-                            {/* Bottom Right Reticle Crosshair */}
-                            <div className="absolute bottom-3 right-3 z-10 mix-blend-exclusion pointer-events-none">
-                              <span className="font-mono text-xs text-white tracking-widest">
-                                [ + ]
-                              </span>
-                            </div>
-
-                            {/* Hover Quick Prompt */}
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center pointer-events-none">
-                              <span className="font-mono text-xs text-white bg-black/80 px-4 py-2 border border-white/30 tracking-widest uppercase">
-                                INSPECT DOSSIER
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* 2. CLICKABLE PORTFOLIO DOSSIER BOX */}
-                          <div
-                            onClick={() => onSelectArtifact?.(artifact)}
-                            className="group relative w-full lg:w-7/12 bg-black border border-white/20 hover:border-white p-6 sm:p-8 lg:p-10 flex flex-col justify-between cursor-pointer transition-all duration-300 hover:shadow-[0_0_40px_rgba(255,255,255,0.06)]"
-                          >
-                            {/* Top Meta Row */}
-                            <div>
-                              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                                <div className="flex items-center gap-2">
-                                  <span className="px-2 py-0.5 bg-white/10 text-white font-mono text-[10px] tracking-widest uppercase border border-white/20">
-                                    {artifact.categoryLabel}
-                                  </span>
-                                  {artifact.status === 'ACTIVE' && (
-                                    <span className="flex items-center gap-1.5 px-2 py-0.5 bg-emerald-950/80 text-emerald-400 font-mono text-[10px] tracking-wider uppercase border border-emerald-500/40">
-                                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
-                                      CURRENT
-                                    </span>
-                                  )}
-                                </div>
-                                <span className="font-mono text-[11px] text-white/50 tracking-wider">
-                                  {artifact.timeframe}
-                                </span>
-                              </div>
-
-                              {/* Title & Organization */}
-                              <h4
-                                className="font-display font-[900] text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight leading-[95%] uppercase mb-2 group-hover:translate-x-1 transition-transform"
-                                style={{ transform: 'scaleY(1.15)', transformOrigin: 'left' }}
-                              >
-                                {artifact.title}
-                              </h4>
-                              <div className="font-mono text-xs text-white/70 tracking-wide uppercase mb-6">
-                                {artifact.role} —{' '}
-                                <span className="text-white font-semibold">
-                                  {artifact.organization}
-                                </span>
-                              </div>
-
-                              {/* Short Summary */}
-                              <p className="font-mono text-xs sm:text-sm text-white/80 leading-relaxed mb-6">
-                                {artifact.shortSummary}
-                              </p>
-
-                              {/* Structured Deliverables / Highlights */}
-                              <div className="space-y-2 mb-6 border-l border-white/20 pl-4 py-1">
-                                {artifact.bulletPoints.map((point, pIdx) => (
-                                  <div
-                                    key={pIdx}
-                                    className="font-mono text-[11px] sm:text-xs text-white/75 leading-relaxed flex items-start gap-2"
-                                  >
-                                    <span className="text-white/40 select-none">›</span>
-                                    <span>{point}</span>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-
-                            {/* Bottom Row: Tools & Action Buttons */}
-                            <div className="pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                              {/* Capabilities / Tools Pills */}
-                              <div className="flex flex-wrap gap-1.5">
-                                {artifact.tools.map((tool) => (
-                                  <span
-                                    key={tool}
-                                    className="px-2 py-0.5 font-mono text-[10px] text-white/60 bg-white/[0.03] border border-white/10 uppercase tracking-wider"
-                                  >
-                                    {tool}
-                                  </span>
-                                ))}
-                              </div>
-
-                              {/* Action Trigger */}
-                              <div className="flex items-center gap-3 self-end sm:self-auto flex-shrink-0">
-                                {artifact.link && (
-                                  <a
-                                    href={artifact.link}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    onClick={(e) => e.stopPropagation()}
-                                    className="font-mono text-xs text-white/70 hover:text-white px-3 py-1.5 border border-white/30 hover:border-white uppercase tracking-wider transition-colors"
-                                  >
-                                    VISIT ↗
-                                  </a>
-                                )}
-                                <span className="font-mono text-xs text-black bg-white group-hover:bg-neutral-200 px-3 py-1.5 uppercase font-bold tracking-wider transition-colors">
-                                  INSPECT DOSSIER →
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </section>
-              );
-            })}
+                    {/* Artifacts in this Category */}
+                    <div className="space-y-12 sm:space-y-16">
+                      {items.map((artifact, itemIdx) => renderCard(artifact, itemIdx))}
+                    </div>
+                  </section>
+                );
+              })
+            )}
           </div>
         </div>
       </div>

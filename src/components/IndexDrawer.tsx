@@ -26,10 +26,10 @@ export const IndexDrawer: React.FC<IndexDrawerProps> = ({
             className="font-display font-[900] text-3xl sm:text-5xl text-white tracking-tight leading-none uppercase"
             style={{ transform: 'scaleY(1.2)', transformOrigin: 'left center' }}
           >
-            INDEX ARCHIVE // CV
+            INDEX ARCHIVE // 00
           </h2>
           <p className="font-mono text-xs text-white/50 tracking-widest uppercase mt-2">
-            [ HARSH VERMA // VAULT SYSTEM 00 ] — {ARCHIVE_ARTIFACTS.length} ENTRIES REGISTERED
+            [ HARSH VERMA // 00 ARCHIVE ] — {ARCHIVE_ARTIFACTS.length} ENTRIES REGISTERED
           </p>
         </div>
 
@@ -46,7 +46,7 @@ export const IndexDrawer: React.FC<IndexDrawerProps> = ({
         <div className="lg:col-span-2 bg-white/[0.02] border border-white/10 p-6 flex flex-col justify-between">
           <div>
             <span className="font-mono text-[10px] text-white/50 tracking-widest uppercase block mb-2">
-              CURATOR PROFILE // CORE POSITIONING
+              BUILDER PROFILE // CORE POSITIONING
             </span>
             <h3
               className="font-display font-[800] text-xl sm:text-2xl text-white tracking-tight uppercase leading-snug mb-3"
@@ -58,8 +58,7 @@ export const IndexDrawer: React.FC<IndexDrawerProps> = ({
               {PROFILE_INFO.tagline}
             </p>
             <p className="font-mono text-xs text-white/70 leading-relaxed uppercase m-0">
-              FRAMEWORK: BRIDGING PRODUCT MANAGEMENT, GROWTH/GTM EXPERIMENTS, AND ROBUST
-              DATA/WORKFLOW ENGINEERING (PYTHON, SCI-PY, DOCKER, N8N).
+              FOCUSING ON ZERO-TO-ONE CONSUMER TECH, VIRAL DISTRIBUTION LOOPS, AND APPLIED AUTOMATION PIPELINES (PYTHON, DOCKER, N8N).
             </p>
           </div>
 
@@ -116,7 +115,7 @@ export const IndexDrawer: React.FC<IndexDrawerProps> = ({
                 className="font-display font-[800] text-lg sm:text-xl text-white tracking-tight uppercase group-hover:translate-x-2 transition-transform"
                 style={{ transform: 'scaleY(1.15)', transformOrigin: 'left' }}
               >
-                {item.title}
+                {item.organization} — <span className="text-white/60 font-mono text-xs font-normal">{item.role}</span>
               </span>
             </div>
 

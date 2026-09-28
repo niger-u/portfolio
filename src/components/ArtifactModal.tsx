@@ -67,11 +67,13 @@ export const ArtifactModal: React.FC<ArtifactModalProps> = ({ artifact, onClose 
               className="font-display font-[900] text-2xl sm:text-4xl text-white tracking-tight leading-[95%] uppercase mb-2"
               style={{ transform: 'scaleY(1.15)', transformOrigin: 'left top' }}
             >
-              {artifact.title}
+              {artifact.organization}
             </h2>
 
-            <div className="font-mono text-xs text-white/70 uppercase tracking-wide mb-4">
-              {artifact.role} — <span className="text-white font-bold">{artifact.organization}</span>
+            <div className="font-mono text-xs text-white/70 uppercase tracking-wide mb-4 flex flex-wrap items-center gap-2">
+              <span className="text-white font-bold">{artifact.role}</span>
+              <span className="text-white/30">•</span>
+              <span className="text-white/60">{artifact.title}</span>
             </div>
 
             <p className="font-mono text-xs sm:text-sm text-white/80 leading-relaxed mb-6">

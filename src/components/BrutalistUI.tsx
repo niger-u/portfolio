@@ -82,10 +82,9 @@ export const HeroUI: React.FC = () => {
         style={{ mixBlendMode: 'exclusion' }}
       >
         <p className="font-mono text-[11px] leading-[145%] tracking-[0.02em] uppercase text-white m-0">
-          [SYS.00 // HARSH VERMA — OPERATIONS &amp; PRODUCT MANAGEMENT] — CHEMICAL
-          ENGINEERING @ JADAVPUR UNIVERSITY ('28). SPECIALIZING IN PRODUCT MANAGEMENT, DATA/WORKFLOW
-          PIPELINES, AND GTM SCALING. CONTACT: {PROFILE_INFO.email} | {PROFILE_INFO.location}.
-          ENGINE_STATE: ACTIVE. SCROLL TO INITIALIZE VAULT.
+          [SYS.00 // HARSH VERMA] — CHEMICAL ENGINEERING @ JADAVPUR UNIVERSITY ('28) // CURRENTLY BUILDING IN STEALTH.
+          FOCUSING ON CONSUMER TECH EXPERIMENTS, GROWTH ENGINES &amp; AUTOMATION WORKFLOWS.
+          CONTACT: {PROFILE_INFO.email} | {PROFILE_INFO.location}. ENGINE_STATE: ACTIVE. SCROLL TO ENTER.
         </p>
       </motion.div>
 
@@ -122,17 +121,17 @@ export const HeroUI: React.FC = () => {
             className="font-display font-[800] text-[16px] lg:text-[20px] leading-[95%] text-center lg:text-left tracking-[-0.05em] uppercase text-white"
             style={{ transform: 'scaleY(1.15)' }}
           >
-            PROD // OPS // GTM
+            BUILDING IN STEALTH // '26
             <br />
-            JADAVPUR UNIV // '28
+            KOLKATA // WORLDWIDE
           </div>
         </div>
 
         <div
-          className="font-display font-[900] text-[36px] sm:text-[46px] lg:text-[60px] leading-[95%] text-center lg:text-left tracking-[-0.06em] text-white whitespace-nowrap"
+          className="font-display font-[900] text-[42px] sm:text-[54px] lg:text-[72px] leading-[95%] text-center lg:text-left tracking-[-0.06em] text-white whitespace-nowrap"
           style={{ transform: 'scaleY(1.2)' }}
         >
-          PORTFOLIO // INDEX
+          * SCHYEAH *
         </div>
       </motion.div>
     </>
@@ -156,7 +155,7 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
         style={{ mixBlendMode: 'exclusion' }}
       >
         <span className="hidden lg:inline-block font-display font-[800] text-[13px] tracking-[-0.03em] uppercase text-white">
-          00 // CV &amp; DOSSIER
+          00 // SCHYEAH
         </span>
 
         <div className="flex items-center gap-5 lg:gap-8">
@@ -177,7 +176,7 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
           </button>
 
           <span className="font-mono font-[500] text-[12px] lg:text-[13px] text-white tracking-wider">
-            [ DOSSIER // 09 ]
+            [ SCHYEAH // 09 ]
           </span>
         </div>
       </motion.nav>
@@ -226,7 +225,7 @@ export const BrutalistUI: React.FC<BrutalistUIProps> = ({ onOpenIndex, onEnterCl
           HARSH VERMA — {PROFILE_INFO.email} | {PROFILE_INFO.phone}
         </span>
         <span className="font-mono font-[500] text-[10px] lg:text-[11px] tracking-[0.03em] uppercase text-white">
-          [ CHEMICAL ENG @ JADAVPUR UNIV '28 // DIGITAL ARCHIVE ]
+          [ CHEMICAL ENG @ JADAVPUR UNIV '28 // 00 ARCHIVE ]
         </span>
       </footer>
     </>
